@@ -1,10 +1,8 @@
-When interviewing for an SAP CPI (Integration Suite) role, you aren’t just expected to know *what* these tools are, but *why* you would choose one over the other in a real-world production scenario.
-
 Here are the high-level interview notes and "pro-tips" for the **General vs. Iterative Splitter**.
 
 ---
 
-## 核心 (Core) Comparison Points
+##  (Core) Comparison Points
 
 ### 1. The "Envelope" Rule
 
