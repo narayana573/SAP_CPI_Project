@@ -1,3 +1,29 @@
+  
+**Why Security is Required on the Receiver Side (On-Premise)**
+
+* **Protection of Internal Systems:** The receiver side (e.g., S/4HANA, SAP ERP) is usually behind a corporate firewall. Directly exposing it to the internet is a massive security risk. The Cloud Connector acts as a secure, authorized intermediary.  
+* **Reverse-Invoke Proxy (Outbound-Only):** The Cloud Connector installed in the on-premise network initiates the connection to the BTP (Cloud) side. This means the firewall only needs to allow *outbound* traffic, which is much safer than opening *inbound* ports.  
+* **Fine-Grained Control (Allow-Listing):** The connector allows administrators to restrict which specific internal systems, URLs, or RFC functions can be exposed to the Cloud, preventing unauthorized access to other parts of the network.  
+* **Trust and Authentication:** The receiver-side connector manages certificates to verify the identity of the incoming request from the cloud. 
+
+**Why Intense Security is Not Required on the Sender Side (Cloud)**
+
+* **Reverse-Invoke Architecture:** Since the connection is initiated *from* the internal network *to* the cloud, the cloud side (e.g., SAP BTP) does not need to know how to pierce the firewall. It simply listens for the authorized tunnel established by the on-premise connector.  
+* **Security Responsibility Shift:** The security responsibility for the "sender" (Cloud) is generally managed by the cloud provider (e.g., SAP's Security Center), whereas the security of data entering the private on-premise network is the customer's responsibility.  
+* **Authentication Flow:** While the sender must authenticate, the complex, granular security *rules* (which specific paths are allowed) reside on the receiver side to protect the sensitive internal network. 
+
+**Summary of Differences**
+
+| Feature  | Receiver Side (On-Premise) | Sender Side (Cloud) |
+| :---- | :---- | :---- |
+| **Firewall** | No inbound port opening needed | Not applicable |
+| **Initiation** | Initiates reverse-invoke tunnel | Receives incoming tunnel |
+| **Control** | Fine-grained, whitelist-based | Authentication-based |
+| **Risk** | Direct internal access | Public cloud access |
+
+
+
+
 You’ve done an excellent job breaking down the "Reverse-Invoke" logic. It’s a common point of confusion—many assume the cloud "reaches into" the data center, but your analysis correctly identifies that the internal network is the one extending the hand.
 
 Below is your research and additional technical context formatted into a clean `.md` file, ready for your documentation or study notes.
