@@ -80,3 +80,6 @@ Interviewers often ask why we use these instead of just putting everything in th
 <img width="690" height="462" alt="image" src="https://github.com/user-attachments/assets/1345202f-9f97-4ade-a1f0-cf3ec758148f" />
 
 <img width="1920" height="912" alt="image" src="https://github.com/user-attachments/assets/53746024-1a6c-4ec9-ae94-b3537ad61e6e" />
+
+<img width="1556" height="837" alt="image" src="https://github.com/user-attachments/assets/6142cdb4-860b-401b-9e82-fcc51b339aee" />
+
