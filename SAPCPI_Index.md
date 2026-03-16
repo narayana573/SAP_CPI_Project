@@ -203,6 +203,22 @@ partner can read them).
 * Works with Azure Service Bus, RabbitMQ.
 * Supports durable queues and high reliability.
 * Key for decoupled microservice architectures.
+*
+* ProcessDirect
+Use ProcessDirect adapter (sender and receiver) to establish fast and direct
+communication between integration flows by reducing latency and network overhead
+provided both of them are available within a same tenant.
+Deployment of the ProcessDirect adapter must support N:1 cardinality, where N
+(producer) → 1 (consumer). The Address mentioned in ProcessDirect configuration settings
+must match for producer and consumer integration flows at any given point.
+ProcessDirect Receiver Adapter: If the ProcessDirect adapter is used to send data to other
+integration flows, the integration flow is considered as a producer integration flow. In this
+case, the integration flow has a receiver ProcessDirect adapter.
+ProcessDirect Sender adapter: If the ProcessDirect adapter is used to consume data from
+other integration flows, the integration flow is considered as a consumer integration flow. In
+this case, the integration flow has a sender ProcessDirect adapter.
+
+
 
 ---
 
