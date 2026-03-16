@@ -81,6 +81,15 @@
 ---
 
 ## **5. SFTP Adapter**
+The SFTP receiver adapter connects an SAP Cloud Platform tenant to a remote system
+using the SSH File Transfer protocol to write files to the system. SSH File Transfer protocol is
+also referred to as Secure File Transfer protocol (or SFTP). 
+
+If you have configured a receiver SFTP adapter, message processing is performed as
+follows at runtime: The tenant sends a request to an SFTP server (think of this as the receiver
+system), and the data flow is in the same direction, from the tenant to the SFTP server. In
+other words, the tenant writes files to the SFTP server (from where the communication
+partner can read them).
 
 **Purpose:** Secure file exchange
 **Protocol:** SSH File Transfer
