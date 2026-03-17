@@ -52,8 +52,10 @@ https://community.sap.com/t5/technology-blog-posts-by-members/join-amp-gather-in
 ### **Multicast**
 * **Parallel Multicast**
    >  You can send copies to all routes at once using Parallel Multicast
+   > if one branch fail other branch will not have impact
 * **Sequential Multicast**
   > Sequential Multicast, you can change the order in which the message should be sent to the Sequential Multicast branches
+  > if one branch is failed from there it will break the process.
   <img width="1152" height="2191" alt="multicast" src="https://github.com/user-attachments/assets/4b46d2bc-44eb-4c50-bb21-9405456d4b2a" />
 
 
