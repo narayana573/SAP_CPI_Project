@@ -1,7 +1,6 @@
-In SAP Cloud Integration (CPI), an **Exception Subprocess** is your safety net. It’s a specialized local subprocess that catches errors occurring within the main integration flow. Think of it as a `try-catch` block for your middleware.
+**Exception Subprocess**
 
-Here is a breakdown designed for interview preparation, covering the mechanics, best practices, and the technical "Camel" side of things.
-
+An Exception Subprocess in SAP CPI is a specialized local process component used to catch and handle errors within an integration flow (iFlow). It allows for custom error handling logic—such as sending alerts, logging errors, or transforming messages—whenever a component in the main flow fails, ensuring robust, automated error management
 ---
 
 ## ## Core Concepts for Interviews
