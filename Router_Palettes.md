@@ -24,6 +24,8 @@ Any: If you want to combine any incoming messages independent of their format.
 Plaintext: If messages from different routes are in plain text format.
 XML (Different Format) If messages from different routes are in different XML formats.
 XML (Same Format) If messages from different routes are in the same XML format.
+
+https://community.sap.com/t5/technology-blog-posts-by-members/join-amp-gather-in-sap-cloud-platform-integration/ba-p/13983494
 ```
 
 
