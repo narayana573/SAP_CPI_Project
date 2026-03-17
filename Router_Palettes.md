@@ -1,6 +1,17 @@
 ## Routing Pallet
 
-### **Aggregator**
+## **Join**
+```
+The Join step is used to bring together messages from different routes or branches within a single integration flow.
+It acts as a synchronization point, ensuring that all messages from specified routes have arrived before proceeding further.
+
+ Key Features:
+**Synchronization:** Ensures that all messages from the specified routes are available before proceeding.
+**No Message Modification:** The Join step itself does not modify the content of the messages. It simply brings them together.
+**Routing Flexibility:** Messages can be routed to different branches based on conditions or other criteria.
+```
+
+
 ### **Gather**
 ```
 The Gather step merges multiple messages into a single message.
@@ -28,17 +39,8 @@ XML (Same Format) If messages from different routes are in the same XML format.
 https://community.sap.com/t5/technology-blog-posts-by-members/join-amp-gather-in-sap-cloud-platform-integration/ba-p/13983494
 ```
 
+### **Aggregator**
 
-## **Join**
-```
-The Join step is used to bring together messages from different routes or branches within a single integration flow.
-It acts as a synchronization point, ensuring that all messages from specified routes have arrived before proceeding further.
-
- Key Features:
-**Synchronization:** Ensures that all messages from the specified routes are available before proceeding.
-**No Message Modification:** The Join step itself does not modify the content of the messages. It simply brings them together.
-**Routing Flexibility:** Messages can be routed to different branches based on conditions or other criteria.
-```
 ### **Multicast**
 * **Parallel Multicast**
 * **Sequential Multicast**
