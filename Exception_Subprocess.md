@@ -3,6 +3,15 @@
 An Exception Subprocess in SAP CPI is a specialized local process component used to catch and handle errors within an integration flow (iFlow). It allows for custom error handling logic—such as sending alerts, logging errors, or transforming messages—whenever a component in the main flow fails, ensuring robust, automated error management
 ---
 
+Exception Sub Process:
+
+If any error occurs in developed i-flow this Exception Sub-Process will generate an email and will send it to the required stakeholders which we will configure in MAIL adapter. So, that Support/Monitoring team will get an alert mail then they will look into the issue and will rectify that error.
+
+Let’s consider that you have the below i-Flow named Exception_SubProcess. In that we should create an Exception Sub process. So, that if any exception/error occurs in that flow it will send an alert mail to Support team.
+
+https://community.sap.com/t5/technology-blog-posts-by-members/how-to-create-exception-sub-process-for-i-flow-in-sap-cpi/ba-p/13542375
+
+
 ## ## Core Concepts for Interviews
 
 ### 1. What is an Exception Subprocess?
