@@ -79,9 +79,9 @@ General Splitter splits the message into N parts based on configured conditions 
 ```
 
 * **Iterating Splitter**
-  ```
-  Iterating Splitter splits a composite message into a series of smaller messages without copying the enveloping elements of the composite message
-  ```
+```
+Iterating Splitter splits a composite message into a series of smaller messages without copying the enveloping elements of the composite message
+```
 * **IDoc Splitter**
 
 * **PKCS#7/CMS Splitter**
