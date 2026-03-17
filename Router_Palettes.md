@@ -46,6 +46,11 @@ https://community.sap.com/t5/technology-blog-posts-by-members/join-amp-gather-in
    >  You can send copies to all routes at once using Parallel Multicast
 * **Sequential Multicast**
   > Sequential Multicast, you can change the order in which the message should be sent to the Sequential Multicast branches
+  <img width="1152" height="2191" alt="multicast" src="https://github.com/user-attachments/assets/4b46d2bc-44eb-4c50-bb21-9405456d4b2a" />
+
+
+
+
 ### **Router**
 ```
 A router works based on the conditions provided. It determines what data needs to reach the target or receiver.
