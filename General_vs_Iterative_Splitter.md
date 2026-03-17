@@ -5,7 +5,8 @@
 **General Splitter**
 The General Splitter splits a composite message comprising N messages into N individual messages, each containing one message with the enveloping elements of the composite message. We use the term enveloping elements to refer to the elements above and including the split point. Note elements that follow the one which is indicated as split point in the original message (but on the same level), are'nt counted as enveloping elements. They will not be part of the resulting messages.
 
-**Iterating Splitter**
+**Iterating Splitter**:
+
 The Iterating Splitter splits a composite message into a series of messages without copying the enveloping elements of the composite message.
 ---
 
