@@ -10,6 +10,8 @@ The General Splitter splits a composite message comprising N messages into N ind
 The Iterating Splitter splits a composite message into a series of messages without copying the enveloping elements of the composite message.
 ---
 
+https://help.sap.com/docs/cloud-integration/sap-cloud-integration/general-and-iterating-splitter
+
 ##  (Core) Comparison Points
 
 ### 1. The "Envelope" Rule
