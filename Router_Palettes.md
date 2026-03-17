@@ -47,6 +47,22 @@ https://community.sap.com/t5/technology-blog-posts-by-members/join-amp-gather-in
 * **Sequential Multicast**
   > Sequential Multicast, you can change the order in which the message should be sent to the Sequential Multicast branches
 ### **Router**
+```
+A router works based on the conditions provided. It determines what data needs to reach the target or receiver.
+When we use a router palette, we need to provide conditions for the router. Based on these conditions,
+the process occurs, and the data reaches the receiver.
+
+"In a router, we have two parts:
+
+General: In the General section, if desired, we can assign meaningful names.
+Processing: In the Processing section, the actual processing occurs. This is where we define the conditions.
+In the Processing section, there are several fields.
+
+Expression Type: Here, we need to specify the type, whether it is XML or non-XML,
+Condition: Here we define the condition for the process.
+Default: we use this to send the default data, when the conditions are not satisfying the given condition
+         then default option comes to play.
+```
 ### **Splitter**
 * **EDI Splitter**
 * **General Splitter**
