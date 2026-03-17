@@ -93,6 +93,8 @@ the enveloping elements of the composite message.
 
 
 * **IDoc Splitter**
+  <img width="757" height="267" alt="image" src="https://github.com/user-attachments/assets/3a2b3ffd-ae52-4cff-af6d-ada693b7f4c3" />
+
 
 * **PKCS#7/CMS Splitter**
 * **Tar Splitter**
