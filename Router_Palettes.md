@@ -43,7 +43,9 @@ https://community.sap.com/t5/technology-blog-posts-by-members/join-amp-gather-in
 
 ### **Multicast**
 * **Parallel Multicast**
+   >  You can send copies to all routes at once using Parallel Multicast
 * **Sequential Multicast**
+  > Sequential Multicast, you can change the order in which the message should be sent to the Sequential Multicast branches
 ### **Router**
 ### **Splitter**
 * **EDI Splitter**
