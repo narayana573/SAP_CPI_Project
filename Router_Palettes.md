@@ -74,14 +74,24 @@ Default: we use this to send the default data, when the conditions are not satis
 ```
 General Splitter:
 
-The splitter is used to split the bulk message into a small chunk.
-General Splitter splits the message into N parts based on configured conditions provided in the general splitter.
+The General Splitter splits a composite message comprising N messages into N
+individual messages, each containing one message with the enveloping elements of the
+composite message. We use the term enveloping elements to refer to the elements above
+and including the split point. Note elements that follow the one which is indicated as split
+point in the original message (but on the same level), aren’t counted as enveloping
+elements. They will not be part of the resulting messages.
 ```
+<img width="745" height="922" alt="image" src="https://github.com/user-attachments/assets/0cf4eddf-47bd-4018-9399-907368e0bd34" />
+
 
 * **Iterating Splitter**
 ```
-Iterating Splitter splits a composite message into a series of smaller messages without copying the enveloping elements of the composite message
+The Iterating Splitter splits a composite message into a series of messages without copying
+the enveloping elements of the composite message.
 ```
+<img width="877" height="837" alt="image" src="https://github.com/user-attachments/assets/a779ff1f-b567-4468-a760-6a9958afbebd" />
+
+
 * **IDoc Splitter**
 
 * **PKCS#7/CMS Splitter**
