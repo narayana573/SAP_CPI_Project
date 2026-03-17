@@ -48,6 +48,16 @@ https://community.sap.com/t5/technology-blog-posts-by-members/join-amp-gather-in
 ```
 
 ### **Aggregator**
+```
+The Aggregator step to combine multiple incoming messages into a single message.
+Usage of an Aggregator step in a Local Integration Process or Exception Subprocess is not
+supported.
+
+What is the Aggregation Pattern?
+An aggregator flow step collects and stores individual messages until a complete set
+of related messages has been received. On successful receipt of the messages, the aggregator
+publishes a single message
+```
 
 ### **Multicast**
 * **Parallel Multicast**
