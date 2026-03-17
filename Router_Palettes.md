@@ -36,6 +36,14 @@ Plaintext: If messages from different routes are in plain text format.
 XML (Different Format) If messages from different routes are in different XML formats.
 XML (Same Format) If messages from different routes are in the same XML format.
 
+Gather Configuration: Select the Gather component from the Message Routing tab
+and set the Incoming Format to XML (Different Format) or XML (Same Format).
+Aggregation Algorithm: Use the "Combine" option to merge the message bodies into a single, structured XML message.
+Resulting Payload: The output is typically wrapped in multimap:Messages with subsequent multimap:Message1,
+ multimap:Message2, etc., tags to differentiate the sources.
+Removing Multimap Tags: If a clean XML is needed, use a Groovy script or
+ Content Modifier to remove the multimap namespace and wrapping tags after the Gather step.
+
 https://community.sap.com/t5/technology-blog-posts-by-members/join-amp-gather-in-sap-cloud-platform-integration/ba-p/13983494
 ```
 
