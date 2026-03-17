@@ -71,8 +71,19 @@ Default: we use this to send the default data, when the conditions are not satis
 ### **Splitter**
 * **EDI Splitter**
 * **General Splitter**
-* **IDoc Splitter**
+```
+General Splitter:
+
+The splitter is used to split the bulk message into a small chunk.
+General Splitter splits the message into N parts based on configured conditions provided in the general splitter.
+```
+
 * **Iterating Splitter**
+  ```
+  Iterating Splitter splits a composite message into a series of smaller messages without copying the enveloping elements of the composite message
+  ```
+* **IDoc Splitter**
+
 * **PKCS#7/CMS Splitter**
 * **Tar Splitter**
 * **Zip Splitter**
