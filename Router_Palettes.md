@@ -2,6 +2,30 @@
 
 ### **Aggregator**
 ### **Gather**
+```
+The Gather step merges multiple messages into a single message.
+This is useful when you need to combine data from different sources or create a summary message.
+
+Key Features:
+
+Message Combination: Merges multiple messages into a single message.
+Combination Strategies: Offers various strategies for combining messages,
+                       such as appending, concatenating, or creating a collection.
+Conditional Gathering: Can be configured to gather messages based on specific conditions.
+In Gather steps, there are two tabs:
+
+General: You can give any meaningful name.
+Aggregator Strategy: In this tab, several options are present to perform operations.
+Incoming Format:
+
+You can select which format to apply; here, four formats are available:
+
+Any: If you want to combine any incoming messages independent of their format.
+Plaintext: If messages from different routes are in plain text format.
+XML (Different Format) If messages from different routes are in different XML formats.
+XML (Same Format) If messages from different routes are in the same XML format.
+```
+
 
 ## **Join**
 ```
