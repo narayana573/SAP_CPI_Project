@@ -36,6 +36,10 @@ https://help.sap.com/docs/cloud-integration/sap-cloud-integration/define-content
 Idempotency helps ensure data consistency and integrity, where messages or operations might be retried,
 causing duplicate messages, due to network glitches, system failures, or any other issues. 
 It helps to maintain data consistency and integrity in complex integration scenarios.
+
+https://community.sap.com/t5/technology-blog-posts-by-sap/step-by-step-for-implementing-idempotent-process-call-sap-cloud-integration/ba-p/13543161
+https://community.sap.com/t5/technology-blog-posts-by-members/sap-cloud-integration-idempotent-process-call/ba-p/13580854
+
 	
     * **Looping Process Call:**
     * **Process Call:** 
