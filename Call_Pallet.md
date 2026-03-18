@@ -33,6 +33,10 @@ https://help.sap.com/docs/cloud-integration/sap-cloud-integration/define-content
 ### **Local Call**
 
     * **Idempotent Process Call:** 
+Idempotency helps ensure data consistency and integrity, where messages or operations might be retried,
+causing duplicate messages, due to network glitches, system failures, or any other issues. 
+It helps to maintain data consistency and integrity in complex integration scenarios.
+	
     * **Looping Process Call:**
     * **Process Call:** 
 ---
