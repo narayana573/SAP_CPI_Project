@@ -28,6 +28,7 @@ https://help.sap.com/docs/cloud-integration/sap-cloud-integration/define-content
 	https://help.sap.com/docs/integration-suite/sap-integration-suite/define-request-reply
 	
 	* **Send:** 
+	https://help.sap.com/docs/cloud-integration/sap-cloud-integration/define-send-step
 
 ### **Local Call**
 
