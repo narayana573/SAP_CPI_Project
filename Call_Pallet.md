@@ -25,6 +25,8 @@ https://help.sap.com/docs/cloud-integration/sap-cloud-integration/define-content
 	https://help.sap.com/docs/integration-suite/sap-integration-suite/define-poll-enrich
 	
 	* **Request Reply:** 
+	https://help.sap.com/docs/integration-suite/sap-integration-suite/define-request-reply
+	
 	* **Send:** 
 
 ### **Local Call**
