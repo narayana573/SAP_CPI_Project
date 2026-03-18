@@ -42,5 +42,15 @@ https://community.sap.com/t5/technology-blog-posts-by-members/sap-cloud-integrat
 
 	
     * **Looping Process Call:**
+A Looping Process Call in SAP Cloud Integration (CPI) is a palette component used
+to repeatedly execute a local integration process based on defined conditions,
+typically used for paginated API calls, processing bulk data in chunks, or retrying operations. 
+It improves performance and reduces memory strain by executing a local process multiple times, 
+with a conditional expression determining when the loop terminates. 
+
+https://help.sap.com/docs/cloud-integration/sap-cloud-integration/define-looping-process-call
+https://community.sap.com/t5/enterprise-resource-planning-blog-posts-by-members/sap-cloud-integration-looping-process-call/ba-p/13598555
+
+	
     * **Process Call:** 
 ---
