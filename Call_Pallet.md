@@ -18,7 +18,7 @@ You can choose between two strategies to enrich these two payloads as a single m
 Combine
 
 Enrich
-
+https://help.sap.com/docs/cloud-integration/sap-cloud-integration/define-content-enricher
 
 ```	
 	* **Poll Enrich:** 
