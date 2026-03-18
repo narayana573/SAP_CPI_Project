@@ -22,6 +22,8 @@ https://help.sap.com/docs/cloud-integration/sap-cloud-integration/define-content
 
 ```	
 	* **Poll Enrich:** 
+	https://help.sap.com/docs/integration-suite/sap-integration-suite/define-poll-enrich
+	
 	* **Request Reply:** 
 	* **Send:** 
 
