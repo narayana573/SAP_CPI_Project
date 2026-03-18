@@ -53,4 +53,7 @@ https://community.sap.com/t5/enterprise-resource-planning-blog-posts-by-members/
 
 	
     * **Process Call:** 
+	Process Call vs. Looping Process Call:
+Process Call: Executes the local process exactly once.
+Looping Process Call: Repeats the called local process multiple times based on a condition, which is efficient for handling large datasets in chunks, reducing memory usage.
 ---
