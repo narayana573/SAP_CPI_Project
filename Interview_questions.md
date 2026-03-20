@@ -1,4 +1,5 @@
 
+
 ---
 
 ## SAP CPI Interview Questions & Answers
@@ -55,3 +56,60 @@ It uses an **Apache Camel-based framework**, which follows a "Message Exchange" 
 | **Purpose** | Used to find the log for a specific failed run. | Used for **End-to-End tracking**. If an I-Flow calls another I-Flow, the Correlation ID remains the same to help you trace the whole journey. |
 
 ---
+
+
+---
+
+## SAP CPI Interview Questions & Answers (Part 2)
+
+### ***10. If I asked you to search a message in the Monitoring section based on an IDoc number, how would you do this?
+**Answer:** To search for a message using a specific business value like an IDoc number, we use **Custom Header Properties**. By default, CPI monitoring only searches by Message ID or Correlation ID. 
+* **The Process:** Inside the Integration Flow, I use a **Content Modifier** or a **Groovy Script** to extract the IDoc number from the payload (using XPath).
+* **The Implementation:** I then use the write variable or script to set a `SAP_ApplicationID` or a custom header. 
+* **The Search:** In the **Monitor Message Processing** dashboard, I can then use the "Application ID" filter or the "Custom Header" search field to find that specific IDoc.
+
+### 11. What is the formula for Syntax/Camel Expression?
+**Answer:** SAP CPI is built on the **Apache Camel framework**, so it uses **Camel Simple Expression Language**.
+* **The Formula:** The general syntax is `${in.header.HeaderName}` or `${property.PropertyName}`.
+* **Common Uses:**
+    * To access a header: `${header.id}`
+    * To access a property: `${property.amount}`
+    * To check a condition: `${header.status} == 'Active'`
+
+### 12. Difference between Header and Property (Variable)
+**Answer:** Both hold data during the message exchange, but their scope and visibility differ:
+* **Header:** It is part of the **Message** itself. When you call an external system (like a REST API via HTTP), these headers are often sent along with the request. They are "external" facing.
+* **Property (Exchange Property):** It is local to the **Integration Flow**. It stays within the CPI runtime and is never sent to the receiver system. They are "internal" facing and used for logic, routing, or temporary storage.
+
+### 13. What is the process of creating a new Header or Property? How do you create it?
+**Answer:** The most common way is using the **Content Modifier** step.
+1.  Add a **Content Modifier** to your I-Flow.
+2.  Go to the **Message Header** or **Exchange Property** tab.
+3.  Click **Add**.
+4.  Provide a **Name**, select the **Type** (XPath, Constant, Header, Property, or Global Variable), and provide the **Value**.
+* *Alternatively:* You can create them via **Groovy Script** using `message.setHeader("Name", value)` or `message.setProperty("Name", value)`.
+
+### 14. What are the different Source types you can support?
+**Answer:** CPI supports various source types (Adapters) to pull or receive data:
+* **SAP Systems:** IDoc, RFC, OData.
+* **File-based:** SFTP, FTP.
+* **Web Services:** SOAP, HTTP, REST.
+* **Messaging:** AS2, AS4, JMS, AMQP.
+* **Social/Cloud:** Ariba, SuccessFactors, Salesforce, Mail.
+
+### 15. Can we create a property from another property?
+**Answer:** **Yes.**
+* In a **Content Modifier**, you can set the "Type" of a new property as "Property" and then give the name of the existing property in the value field.
+* In **Groovy Script**, you can do this easily:
+    `def val = message.getProperty("PropertyA");`
+    `message.setProperty("PropertyB", val);`
+
+### 16. Have you used Converters? Which kind of Converters have you used?
+**Answer:** Yes, Converters are essential for transforming data formats so the receiver can understand the message.
+* **JSON to XML Converter:** Frequently used when receiving data from modern Web APIs to process it within CPI (which prefers XML for mapping).
+* **XML to JSON Converter:** Used before sending data to a REST-based receiver.
+* **CSV to XML Converter:** Used when picking up flat files from an SFTP server.
+* **EDI to XML / XML to EDI:** Used in B2B scenarios to handle EDIFACT or ANSI X12 standards.
+
+---
+
