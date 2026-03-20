@@ -112,4 +112,51 @@ It uses an **Apache Camel-based framework**, which follows a "Message Exchange" 
 * **EDI to XML / XML to EDI:** Used in B2B scenarios to handle EDIFACT or ANSI X12 standards.
 
 ---
+---
+
+## SAP CPI Interview Questions & Answers (Part 3)
+
+### 17. In the XML to JSON converter, there is an option "Enable Streaming." Any idea what it does?
+**Answer:** **Streaming** is used to handle **Large Payloads** efficiently. 
+* **The Logic:** Instead of loading the entire XML message into the tenant's memory (RAM) at once, streaming processes the data in small chunks or "parts." 
+* **The Benefit:** It prevents "Out of Memory" (OOM) errors. If you are processing a file larger than 100MB, you should enable streaming to ensure the integration flow doesn't crash the worker node.
+
+### 18. What are the Data Store operations you used so far?
+**Answer:** I have used the following four standard operations:
+* **Select:** To retrieve a specific entry from the data store.
+* **Get:** To fetch a message and immediately delete it from the store.
+* **Write:** To save a message or a variable into the data store for future use.
+* **Delete:** To manually remove an entry once the processing is complete.
+
+### ****19. What was the scenario used in Data Store operations?
+**Answer:** "I used the Data Store for **Asynchronous Request-Response** or **Duplicate Check** scenarios."
+* **Example:** "In a project where we received sales orders from an external portal, we used the **Write** operation to store the Order ID. Before processing a new order, we used the **Select** operation to check if that ID already existed in the Data Store to prevent duplicate postings into SAP S/4HANA."
+
+### ****20. What is your normal procedure to find errors?
+**Answer:** My troubleshooting process follows these steps:
+1.  **Trace Level Monitoring:** I set the Log Level to 'Trace' in the Monitor section to see the payload at every step of the I-Flow.
+2.  **Message Processing Log (MPL):** I check the status (Failed/Escalated) and read the error details in the log.
+3.  **Step-by-Step Analysis:** I look for the specific red icon in the trace to identify if the error is a Mapping error (XSLT/Groovy), a connectivity error (Unauthorized/Timeout), or a Scripting error.
+4.  **Simulation:** I use the 'Simulation' tool in the Design area to test small logic parts with sample XML.
+
+### 21. What is an Exception Sub-process?
+**Answer:** It is a local "Catch" block for your I-Flow. If an error occurs in the main process, the control immediately jumps to the **Exception Sub-process**. 
+* **The Purpose:** It is used for **Custom Error Handling**. Instead of the flow simply failing, you can use it to send an email notification to the support team or log a technical error in a specific format.
+
+### 22. What is an Escalation End-Event?
+**Answer:** An **Escalation End-Event** is used when you want to intentionally end a process due to a **functional error** rather than a technical one. 
+* **Difference:** Unlike a 'Message End,' which marks the flow as 'Completed,' an Escalation End-Event marks the message as **'Escalated'** in the monitoring dashboard. This makes it easier for functional consultants to find data-related issues (e.g., "Customer ID missing").
+
+### 23. What is a Content Enricher? What are the actions or parameters inside?
+**Answer:** A Content Enricher is used to "fill the gaps" in a message by calling an external system for more data.
+* **Actions:**
+    * **Enrich:** Adds the retrieved data to the existing message.
+* **Key Parameters:**
+    1.  **Lookup Message:** The external call (OData/SOAP) to get extra info.
+    2.  **Aggregation Algorithm:** * *Combine:* Merges everything.
+        * *Combine via XPath:* Links the main message and lookup data based on a common field (e.g., Product ID).
+    3.  **Key Elements:** The fields used to join the two data sets (similar to a SQL Join).
+
+---
+
 
