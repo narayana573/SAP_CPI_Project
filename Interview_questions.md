@@ -139,7 +139,7 @@ It uses an **Apache Camel-based framework**, which follows a "Message Exchange" 
 3.  **Step-by-Step Analysis:** I look for the specific red icon in the trace to identify if the error is a Mapping error (XSLT/Groovy), a connectivity error (Unauthorized/Timeout), or a Scripting error.
 4.  **Simulation:** I use the 'Simulation' tool in the Design area to test small logic parts with sample XML.
 
-### 21. What is an Exception Sub-process?
+### 21. What is an Exception Sub-process?   -- RE DO the Scenario (common sub process)
 **Answer:** It is a local "Catch" block for your I-Flow. If an error occurs in the main process, the control immediately jumps to the **Exception Sub-process**. 
 * **The Purpose:** It is used for **Custom Error Handling**. Instead of the flow simply failing, you can use it to send an email notification to the support team or log a technical error in a specific format.
 
