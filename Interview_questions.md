@@ -143,7 +143,7 @@ It uses an **Apache Camel-based framework**, which follows a "Message Exchange" 
 **Answer:** It is a local "Catch" block for your I-Flow. If an error occurs in the main process, the control immediately jumps to the **Exception Sub-process**. 
 * **The Purpose:** It is used for **Custom Error Handling**. Instead of the flow simply failing, you can use it to send an email notification to the support team or log a technical error in a specific format.
 
-### 22. What is an Escalation End-Event?
+### **** 22. What is an Escalation End-Event?
 **Answer:** An **Escalation End-Event** is used when you want to intentionally end a process due to a **functional error** rather than a technical one. 
 * **Difference:** Unlike a 'Message End,' which marks the flow as 'Completed,' an Escalation End-Event marks the message as **'Escalated'** in the monitoring dashboard. This makes it easier for functional consultants to find data-related issues (e.g., "Customer ID missing").
 
