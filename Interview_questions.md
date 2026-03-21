@@ -158,5 +158,67 @@ It uses an **Apache Camel-based framework**, which follows a "Message Exchange" 
     3.  **Key Elements:** The fields used to join the two data sets (similar to a SQL Join).
 
 ---
+---
+
+## SAP CPI Interview Questions & Answers (Part 4)
+
+### 24. What Splitters have you used?
+**Answer:** I have primarily used the **General Splitter** and the **Iterating Splitter**.
+* **General Splitter:** Used when the incoming message has a clear wrapper and I want to split it into individual messages that include the surrounding tags (envelopes).
+* **Iterating Splitter:** Used to split a message without including the root/wrapper tags. It is generally more performance-efficient for simple list processing.
+
+### 25. What are the options inside the General Splitter?
+**Answer:** When configuring a General Splitter, you define:
+* **Expression Type:** Usually XPath.
+* **XPath Expression:** The path to the node where the split should occur (e.g., `/Orders/Order`).
+* **Grouping:** If you want to process, say, 10 records together in one chunk.
+* **Parallel Processing:** To process split messages simultaneously (faster, but requires careful resource management).
+* **Stop on Exception:** If one split fails, should the entire flow stop?
+
+### ****26. Is there any scenario you have used Join or Gather? Where have you used this?
+**Answer:** "Yes, I use Join and Gather in **Multicast** or **Splitter** scenarios."
+* **Scenario:** "When I split a large bulk file into 100 individual records to process them through a mapping logic, I use a **Gather** step at the end to merge them back into a single combined file before sending it to the receiver or an SFTP folder."
+
+### 27. What are the options inside the Gather?
+**Answer:**
+* **Incoming Format:** Usually XML or Plain Text.
+* **Aggregation Algorithm:** 
+    * **Combine:** Simply appends the messages.
+    * **Combine at XPath:** Merges messages under a specific root node (available for XML) "Combine from source (XPath)" & "Combine at target (XPath)
+".
+    * **TAR:** file name wee need to enter
+    * **ZIP:** file name wee need to enter
+* **Outgoing Format:** The final structure you want (usually XML).
+
+### 28. What does Aggregation Algorithm mean?
+**Answer:** It defines **how** the multiple messages should be stitched together. 
+* Combine
+  * Last Message Condition (XPath)
+  * Completion Timeout (in min)
+  * Data Store Name
+
+ * Combine in Sequence   
+    *  Message Sequence Expression (XPath)
+    *  Last Message Condition (XPath)
+    *  Completion Timeout (in min)
+    *  Data Store Name
 
 
+### ****29. Difference between Node and Node Leaf List
+**Answer:** These are terms used in **XPath** selection:
+* **Node:** Refers to an element that can contain child elements (e.g., `<Order>`).
+* **Node Leaf List:** Refers to a specific value or an attribute that has no children (e.g., `<Price>100</Price>`). 
+* In CPI, we usually split at the **Node** level to ensure the data remains structured.
+
+### 30. After a Splitter, what will you use: Join or Gather?
+**Answer:** In most cases, you use **Gather**. 
+* **Join:** This is a technical step that physically brings the split branches back together in the flow model.
+* **Gather:** This is the functional step that actually **combines the data** into a single payload. 
+* *Rule of Thumb:* Use **Join first**, followed immediately by **Gather** to merge the contents.
+
+### 31. What about the Aggregator? Have you used it? At what scenario?
+**Answer:** Unlike Gather (which waits for all parts of a single split message), the **Aggregator** can wait for messages from **different** sources over a period of time.
+* **Scenario:** "I used the Aggregator for **Message Bundling**. For example, if a source system sends 500 individual small XML files throughout the hour, I use the Aggregator to collect them and only send one large 'Bulk' file to the target system every 60 minutes or when the count reaches 500."
+* **Key settings:** You must define a **Correlation Expression** (like `${header.PurchaseOrderNumber}`) so the Aggregator knows which messages belong together.
+
+---
