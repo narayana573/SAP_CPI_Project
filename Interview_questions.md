@@ -202,6 +202,9 @@ It uses an **Apache Camel-based framework**, which follows a "Message Exchange" 
 ### ****26. Is there any scenario you have used Join or Gather? Where have you used this?
 **Answer:** "Yes, I use Join and Gather in **Multicast** or **Splitter** scenarios."
 * **Scenario:** "When I split a large bulk file into 100 individual records to process them through a mapping logic, I use a **Gather** step at the end to merge them back into a single combined file before sending it to the receiver or an SFTP folder."
+<img width="896" height="534" alt="Untitled11" src="https://github.com/user-attachments/assets/c550019a-c3ce-4ec2-8c00-039e2e5070f2" />
+
+
 
 ### 27. What are the options inside the Gather?
 **Answer:**
