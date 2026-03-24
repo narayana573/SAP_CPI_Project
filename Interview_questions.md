@@ -147,11 +147,11 @@ It uses an **Apache Camel-based framework**, which follows a "Message Exchange" 
 * **Write:** To save a message or a variable into the data store for future use.
 * **Delete:** To manually remove an entry once the processing is complete.
 
-### ****19. What was the scenario used in Data Store operations?
+### 19. What was the scenario used in Data Store operations?
 **Answer:** "I used the Data Store for **Asynchronous Request-Response** or **Duplicate Check** scenarios."
 * **Example:** "In a project where we received sales orders from an external portal, we used the **Write** operation to store the Order ID. Before processing a new order, we used the **Select** operation to check if that ID already existed in the Data Store to prevent duplicate postings into SAP S/4HANA."
 
-### ****20. What is your normal procedure to find errors?
+### 20. What is your normal procedure to find errors?
 **Answer:** My troubleshooting process follows these steps:
 1.  **Trace Level Monitoring:** I set the Log Level to 'Trace' in the Monitor section to see the payload at every step of the I-Flow.
 2.  **Message Processing Log (MPL):** I check the status (Failed/Escalated) and read the error details in the log.
@@ -175,6 +175,7 @@ It uses an **Apache Camel-based framework**, which follows a "Message Exchange" 
     2.  **Aggregation Algorithm:** * *Combine:* Merges everything.
         * *Combine via XPath:* Links the main message and lookup data based on a common field (e.g., Product ID).
     3.  **Key Elements:** The fields used to join the two data sets (similar to a SQL Join).
+<img width="466" height="440" alt="image" src="https://github.com/user-attachments/assets/1a3fe354-f962-4cd0-9559-fd0862d536f7" />
 
 ---
 ---
