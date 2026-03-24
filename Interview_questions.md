@@ -217,7 +217,7 @@ It uses an **Apache Camel-based framework**, which follows a "Message Exchange" 
 * **Outgoing Format:** The final structure you want (usually XML).
 <img width="896" height="534" alt="Untitled11" src="https://github.com/user-attachments/assets/c550019a-c3ce-4ec2-8c00-039e2e5070f2" />
 
-### 28. What does Aggregation Algorithm mean?
+### ************28. What does Aggregation Algorithm mean?
 **Answer:** It defines **how** the multiple messages should be stitched together. 
 * Combine
   * Last Message Condition (XPath)
