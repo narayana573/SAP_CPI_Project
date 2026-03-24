@@ -13,7 +13,6 @@ Defines process boundaries.
 
 * **Sender**
 * **Receiver**
-* **Integration Process**
 
 ---
 
