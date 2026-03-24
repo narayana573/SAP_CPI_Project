@@ -185,7 +185,11 @@ It uses an **Apache Camel-based framework**, which follows a "Message Exchange" 
 ### 24. What Splitters have you used?
 **Answer:** I have primarily used the **General Splitter** and the **Iterating Splitter**.
 * **General Splitter:** Used when the incoming message has a clear wrapper and I want to split it into individual messages that include the surrounding tags (envelopes).
+<img width="458" height="462" alt="image" src="https://github.com/user-attachments/assets/53247e93-e8e5-4b33-bd66-5a208150e2f6" />
+
 * **Iterating Splitter:** Used to split a message without including the root/wrapper tags. It is generally more performance-efficient for simple list processing.
+<img width="453" height="468" alt="image" src="https://github.com/user-attachments/assets/ce384a3e-110b-4afd-ba66-656db72bc268" />
+
 
 ### 25. What are the options inside the General Splitter?
 **Answer:** When configuring a General Splitter, you define:
