@@ -1,7 +1,7 @@
 
 ---
 
-# ✅ **SAP Cloud Integration (CPI) – 100% Official Palette Reference (Updated 2025)**
+# ✅ **SAP Cloud Integration (CPI) – 100% Official Palette Reference **
 
 *(Every category + every flow step exactly as seen in the Cloud Integration Web UI)*
 
