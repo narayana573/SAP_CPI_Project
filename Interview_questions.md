@@ -28,8 +28,13 @@
 * **Infrastructure:** It is a multi-tenant architecture where your "Tenant" is logically isolated from others.
 * **Scalability:** It is highly elastic. During peak loads, the underlying resources can scale vertically or horizontally to ensure message processing isn't throttled.
 
-### 6. ****What is the Architecture of CPI?
-**Answer:** The architecture consists of three main layers:
+### 6. What is the Architecture of CPI?
+**Answer:** 
+
+SAP CPI (Cloud Platform Integration) is SAP's cloud-based tool used to connect different systems—SAP & non-SAP—across cloud and on-premise environments. It helps automate data exchange using integration flows (iFlows), adapters, and mapping tools. We used it to build and monitor integrations between systems like SAP S/4HANA & external applications.
+
+The architecture consists of three main layers:
+
 1.  **Design Time:** The Web UI where developers model I-Flows.
 2.  **Runtime:** The worker nodes where the actual message processing happens.
 3.  **Monitoring/Management:** Where you track message logs, manage security material (SSH keys, certificates), and deploy artifacts.
