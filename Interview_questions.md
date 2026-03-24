@@ -439,6 +439,32 @@ This looks like the very last page of your current set! These questions focus on
 * **Parallel Processing:** Using the **Parallel Processing** option in Splitters to handle large batches faster.
 * **Condition Optimization:** Placing the most frequent condition at the top of a **Router** to minimize processing time.
 
+### 61. What are Standard Header in CPI?
+
+
+## 1. SAP Protocol-Specific Headers
+These are most commonly used when interacting with SAP S/4HANA, ECC, or SuccessFactors.
+
+| Header Name | Description | Example Value |
+| :--- | :--- | :--- |
+| **`SAP_MessageType`** | The logical IDoc message type. | `MATMAS`, `ORDERS` |
+| **`SAP_SenderService`** | The logical system name of the sender. | `S4H_CLNT_100` |
+| **`SAP_ReceiverService`** | The logical system name of the receiver. | `ERP_CLNT_200` |
+| **`SAP_ApplicationID`** | Used to identify a specific business object. | `4500012345` (PO Number) |
+
+## 2. System & Monitoring Headers
+These help you track messages in the **Monitor** (Message Processing Log) or handle errors.
+
+| Header Name | Description |
+| :--- | :--- |
+| **`SAP_MessageProcessingLogID`** | The unique ID for the current execution (useful for logging). |
+| **`SAP_ErrorBody`** | Contains the error payload if a call fails. |
+| **`SAP_MplCorrelationId`** | Used to link multiple related messages across different flows. |
+| **`SAP_Sender`** | The sender component defined in the Integration Flow. |
+| **`SAP_Receiver`** | The receiver component defined in the Integration Flow. |
+
+---
+
 ---
 
 
