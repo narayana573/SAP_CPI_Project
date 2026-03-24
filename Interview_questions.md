@@ -229,6 +229,7 @@ It uses an **Apache Camel-based framework**, which follows a "Message Exchange" 
     *  Last Message Condition (XPath)
     *  Completion Timeout (in min)
     *  Data Store Name
+<img width="450" height="468" alt="Untitled11" src="https://github.com/user-attachments/assets/c3cc1e89-6acc-431e-b702-36c37d17d36a" />
 
 
 ### ****29. Difference between Node and Node Leaf List
