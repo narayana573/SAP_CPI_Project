@@ -79,6 +79,21 @@ It uses an **Apache Camel-based framework**, which follows a "Message Exchange" 
     * To access a header: `${header.id}`
     * To access a property: `${property.amount}`
     * To check a condition: `${header.status} == 'Active'`
+ 
+
+### 🆔 Technical IDs & Error Expressions
+
+| Objective | Camel Simple Expression | Description |
+| :--- | :--- | :--- |
+| **Get Message ID** | `${header.SAP_MessageProcessingLogID}` | The unique GUID for the specific message execution. |
+| **Get Correlation ID** | `${header.SAP_ApplicationID}` | Often used to link related messages across different flows. |
+| **Get iFlow Name** | `${camelId}` | The technical name/ID of the Integration Flow. |
+| **Get Error Message** | `${exception.message}` | The human-readable error description. |
+| **Get Error Type** | `${exception.type}` | The Java class of the exception (e.g., `SocketTimeoutException`). |
+| **Get Stacktrace** | `${exception.stacktrace}` | The full technical execution path of the failure. |
+| **Get HTTP Status Code** | `${property.CamelHttpResponseCode}` | The numeric response (e.g., 401, 500) from an OData/HTTP call. |
+
+
 
 ### 12. Difference between Header and Property (Variable)
 **Answer:** Both hold data during the message exchange, but their scope and visibility differ:
