@@ -47,9 +47,8 @@ It uses an **Apache Camel-based framework**, which follows a "Message Exchange" 
 * **SaaS (Software):** Ready-to-use apps (e.g., Salesforce, SuccessFactors).
 **Where does CPI fit?** CPI is a **PaaS** (specifically **iPaaS** - Integration Platform as a Service). It provides the platform and tools for you to build your own integration logic.
 
-### 8. ****Which type of environment have you worked on in CPI?
+### 8. Which type of environment have you worked on in CPI?
 **Answer:** Usually, you should mention a standard landscape:
-* **Neo Environment:** The older SAP-proprietary data centers.
 * **Multi-Cloud (Cloud Foundry) Environment:** The modern environment running on AWS/Azure/GCP.
 * "I have worked on the **Cloud Foundry** environment using the **Integration Suite** service, managing Dev, QA, and Production tenants."
 
