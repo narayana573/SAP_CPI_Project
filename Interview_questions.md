@@ -465,6 +465,35 @@ These help you track messages in the **Monitor** (Message Processing Log) or han
 
 ---
 
+
+---
+
+### 1. SAP Protocol-Specific Headers
+These are primarily used in **IDoc**, **OData**, and **SOAP** adapters to ensure business logic is correctly applied in the target SAP system.
+
+| Header Name | Description | Example Value | Real-World Scenario |
+| :--- | :--- | :--- | :--- |
+| **SAP_MessageType** | The logical IDoc message type. | MATMAS, ORDERS | Setting this to `DEBMAS` when syncing Customer Master data to ECC. |
+| **SAP_SenderService** | The logical system name of the sender. | S4H_CLNT_100 | Identifying the source as a specific S/4HANA Finance client. |
+| **SAP_ReceiverService** | The logical system name of the receiver. | ERP_CLNT_200 | Routing a Sales Order specifically to the Production ERP client. |
+| **SAP_ApplicationID** | Used to identify a specific business object. | 4500012345 (PO Number) | Mapping the **Sales Order ID** here so you can search for it in the CPI Monitor. |
+
+---
+
+### 2. System & Monitoring Headers
+These headers are the "bread and crumbs" of CPI. They are automatically generated or manually set to make troubleshooting much easier.
+
+| Header Name | Description | Real-World Example Value | Use Case Example |
+| :--- | :--- | :--- | :--- |
+| **SAP_MessageProcessingLogID** | The unique ID for the current execution. | `AFy-8jL9z_2mN...` | Used in a Groovy Script to log custom details into the specific message's trace. |
+| **SAP_ErrorBody** | Contains the error payload if a call fails. | `{"error": "Invalid Material ID"}` | Capturing the exact JSON error returned by a SuccessFactors API to send in an email alert. |
+| **SAP_MplCorrelationId** | Links multiple related messages across flows. | `CORR_99887766` | Linking a "Parent" flow that splits a file to all the "Child" flows that process individual records. |
+| **SAP_Sender** | The sender component defined in the iFlow. | `Webshop_Portal` | Filtering logs in the Monitoring dashboard to see only messages from the Webshop. |
+| **SAP_Receiver** | The receiver component defined in the iFlow. | `3PL_Logistics_Provider` | Quickly identifying which third-party vendor failed to receive a shipping notification. |
+
+---
+
+
 ---
 
 
