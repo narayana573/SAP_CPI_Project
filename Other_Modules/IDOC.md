@@ -64,39 +64,6 @@ Yes, understanding the **T-codes** is essential for any SAP Consultant or QA pro
 
 ---
 
-### 1. Monitoring and Troubleshooting
-These are the "daily drivers" for checking if an IDOC was successful or if it failed.
-
-* **WE02 / WE05 (IDoc List):** The most common monitoring tools. You can filter by date, IDOC type, or partner. 
-    * **Green Light:** Success.
-    * **Yellow Light:** Being processed/In-flight.
-    * **Red Light:** Error (requires manual intervention).
-* **BD87 (Status Monitor for ALE Messages):** This is more powerful than WE02. It groups IDOCs by status and allows you to **reprocess** failed IDOCs in bulk once the underlying issue is fixed.
-* **WE09 (Search IDocs by Content):** Use this when you don't have the IDOC number but you have a business reference, like a **Purchase Order number** or **Invoice number** hidden inside the data segments.
-
-
-
----
-
-### 2. Development and Configuration
-These codes are used to set up the "piping" that allows IDOCs to flow.
-
-* **WE20 (Partner Profiles):** This is critical. It defines **who** the system is talking to and **which** IDOC types are allowed for that specific partner (Inbound or Outbound).
-* **WE21 (Port Definition):** Defines the technical "gate" the IDOC exits through (e.g., Transactional RFC, File, or XML).
-* **WE30 (IDoc Type Development):** Used to view or create the structure of the IDOC (the segments and fields).
-* **WE60 (IDoc Documentation):** A great library to see the technical documentation for any IDOC type. It shows you exactly what each field means.
-
----
-
-### 3. Testing and Manual Triggering
-If you are testing an integration (like your SAP CPI flows), you’ll use these frequently:
-
-* **WE19 (Test Tool):** The "Swiss Army Knife" for testers. You can take an existing IDOC, modify the data (like changing a price or a date), and trigger it again to see how the system reacts. 
-    * *Note:* Use this carefully in production as it creates a brand new IDOC.
-* **BD10 (Send Material) / BD12 (Send Customer):** These are used to manually trigger the outbound flow of master data from SAP to another system.
-
-
-
 ---
 
 ### Key Status Codes to Remember
