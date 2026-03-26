@@ -194,5 +194,11 @@ Used to push data from SAP to an external system for the first time.
 * **BD14**: Send **Vendor** Master.
 
 ---
+https://community.sap.com/t5/technology-blog-posts-by-members/sap-s4h-idoc-to-sap-cpi-inbound-idoc-interface/ba-p/13484455
 
+
+https://help.sap.com/docs/integration-suite/sap-integration-suite/configure-idoc-sender-adapter
+
+
+https://help.sap.com/docs/integration-suite/sap-integration-suite/configure-idoc-receiver-adapter
 
