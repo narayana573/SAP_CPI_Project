@@ -111,3 +111,121 @@ When you are in **WE02**, keep an eye on these specific status numbers:
 
 ---
 
+---
+
+### 1. Sample IDOC XML: ORDERS (Purchase Order)
+The `ORDERS05` type is typically used to send or receive purchase orders.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<ORDERS05>
+    <IDOC BEGIN="1">
+        <EDI_DC40 SEGMENT="1">
+            <TABNAM>EDI_DC40</TABNAM>
+            <DIRECT>2</DIRECT> 
+            <IDOCTYP>ORDERS05</IDOCTYP>
+            <MESTYP>ORDERS</MESTYP>
+            <SNDPRT>LS</SNDPRT>
+            <SNDPRN>EXT_SYS</SNDPRN>
+            <RCVPRN>SAP_S4H</RCVPRN>
+        </EDI_DC40>
+
+        <E1EDK01 SEGMENT="1">
+            <CURCY>USD</CURCY>
+            <HREFTYP>PO</HREFTYP>
+        </E1EDK01>
+
+        <E1EDKA1 SEGMENT="1">
+            <PARVW>AG</PARVW>
+            <PARTN>10001234</PARTN>
+            <NAME1>Acme Corp</NAME1>
+        </E1EDKA1>
+
+        <E1EDP01 SEGMENT="1">
+            <POSEL>00010</POSEL>
+            <MENGE>50.000</MENGE>
+            <MENEE>EA</MENEE>
+            <E1EDP19 SEGMENT="1">
+                <QUALF>001</QUALF>
+                <IDTNR>MAT-9988</IDTNR> 
+                </E1EDP19>
+        </E1EDP01>
+    </IDOC>
+</ORDERS05>
+```
+
+---
+
+### 2. Sample IDOC XML: INVOIC (Invoice)
+The `INVOIC02` type is used to send billing details to a customer or receive them from a vendor.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<INVOIC02>
+    <IDOC BEGIN="1">
+        <EDI_DC40 SEGMENT="1">
+            <IDOCTYP>INVOIC02</IDOCTYP>
+            <MESTYP>INVOIC</MESTYP>
+            <SNDPRN>SAP_S4H</SNDPRN>
+            <RCVPRN>CUSTOMER_PORTAL</RCVPRN>
+        </EDI_DC40>
+
+        <E1EDK01 SEGMENT="1">
+            <BELNR>90001542</BELNR> <DATUM>20260326</DATUM>
+            <CURCY>EUR</CURCY>
+        </E1EDK01>
+
+        <E1EDS01 SEGMENT="1">
+            <SUMID>011</SUMID> <SUMME>1250.00</SUMME>
+            <WAERL>EUR</WAERL>
+        </E1EDS01>
+    </IDOC>
+</INVOIC02>
+```
+
+
+---
+
+## 1. Monitoring & Troubleshooting (The Essentials)
+These are the first tools you use when an interface fails.
+
+* **WE02 / WE05**: **IDOC List.** The primary monitoring tool to view IDOCs by date, status, or message type.
+* **BD87**: **Status Monitor.** Best for re-processing failed IDOCs (e.g., if a lock error occurred, you can re-run it here).
+* **WE09**: **Search by Content.** Extremely useful when you have a Business Document number (like a PO #) but don't know the IDOC number.
+* **WLF_IDOC**: **Advanced IDOC Monitor.** A modern, faster version of WE02 with better filtering and mass processing capabilities.
+
+
+
+---
+
+## 2. Technical Configuration (The "Piping")
+Use these to set up the connection between SAP and your Middleware (CPI/PO).
+
+* **WE20**: **Partner Profiles.** Where you define which IDOCs are sent/received for a specific system (Logical System, Vendor, or Customer).
+* **WE21**: **Ports in IDOC Processing.** Defines the technical path (e.g., XML File, tRFC, or ABAP-PI for modern integration).
+* **SALE**: **Display ALE Customizing.** The "God Mode" menu for all ALE/IDOC settings, including creating Logical Systems.
+* **BD54**: **Define Logical Systems.** Used to name the systems involved in the exchange (e.g., `S4HCLNT100`, `CPI_TENANT`).
+
+---
+
+## 3. Testing & Development (For Consultants)
+Use these when you are building or debugging a new integration flow.
+
+* **WE19**: **IDOC Test Tool.** Allows you to manually trigger an IDOC or take an existing one, change its data (like a price or material ID), and re-inject it into the system for testing.
+* **WE30**: **IDOC Type Development.** To view the tree structure of an IDOC (segments and fields).
+* **WE31**: **Segment Development.** To view or create the individual fields within a segment.
+* **WE60**: **IDOC Documentation.** Provides a detailed technical manual for any IDOC type; very helpful for mapping fields in CPI.
+* **WE81 / WE82**: **Message Types & Assignments.** Link the Message Type (logical) to the IDOC Type (physical).
+
+---
+
+## 4. Master Data Distribution
+Used to push data from SAP to an external system for the first time.
+
+* **BD10**: Send **Material** Master.
+* **BD12**: Send **Customer** Master.
+* **BD14**: Send **Vendor** Master.
+
+---
+
+
