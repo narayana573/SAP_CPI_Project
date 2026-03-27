@@ -168,7 +168,7 @@ This defines "who" is talking to "whom."
     * Create a new Model View.
     * **Add Message Type:** Define the Sender (S/4HANA system), the Receiver (the Logical System created in BD54), and the Message Type (e.g., `MATMAS`, `DEBMAS`, or `ORDERS`) [[02:17](http://www.youtube.com/watch?v=5gRrGQxHwqU&t=137)].
 
-### **3. Configure RFC Destination (SAP SM59)**
+### **3. Configure RFC(Remote Function Call) Destination (SAP SM59)**
 The RFC destination tells SAP where to send the data on the network.
 * **Connection Type:** Create a new entry of **Type G** (HTTP Connection to External Server) [[04:30](http://www.youtube.com/watch?v=5gRrGQxHwqU&t=270)].
 * **Target System Settings:**
