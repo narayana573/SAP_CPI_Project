@@ -203,9 +203,49 @@ The RFC destination tells SAP where to send the data on the network.
 * **Outbound Monitor:** Check transaction **WE05** or **WE02** in SAP. Status **03** indicates the IDoc was successfully sent to the external system [[09:25](http://www.youtube.com/watch?v=5gRrGQxHwqU&t=565)].
 * **CPI Monitor:** Check the **CPA Monitor** (Message Monitoring) in the Integration Suite to ensure the message was received and processed [[09:44](http://www.youtube.com/watch?v=5gRrGQxHwqU&t=584)].
 
-**Key Links for Reference:**
-* [S/4HANA IDoc integration with SCP Integration Suite](http://www.youtube.com/watch?v=5gRrGQxHwqU) (Video Guide)
-* [SAP S/4HANA IDoc to SAP CPI Inbound Blog](https://community.sap.com/t5/technology-blog-posts-by-members/sap-s4h-idoc-to-sap-cpi-inbound-idoc-interface/ba-p/13484455)
+Setting up a bidirectional IDoc integration between SAP S/4HANA and SAP Cloud Integration (CPI) involves distinct configurations for **Outbound** (S/4 to CPI) and **Inbound** (CPI to S/4) flows.
+
+Below is the sequential configuration, testing, and debugging guide in a tabular format.
+
+### **Part 1: Outbound Configuration (S/4HANA → CPI)**
+This setup allows S/4HANA to push data (like Material or Orders) to a CPI endpoint.
+
+| Step | Transaction / Component | Action & Key Settings |
+| :--- | :--- | :--- |
+| **1. Trust** | **STRUST** | Import CPI Load Balancer Root/Intermediate certificates into `SSL Client (Anonymous)`. |
+| **2. Logical System** | **BD54** | Define a Logical System representing the CPI tenant (e.g., `CPI_TENANT`). |
+| **3. RFC Destination** | **SM59** | Create Type **G** (HTTP). Host: CPI Tenant URL; Port: 443; Path: `/cxf/<your_iflow_path>`. Set SSL to **Active**. |
+| **4. IDoc Port** | **WE21** | Create an **XML HTTP** port and link it to the SM59 RFC Destination created above. |
+| **5. Partner Profile** | **WE20** | Under Partner Type **LS**, add Outbound Message Type. Link to the Port from Step 4. Set to "Transfer IDoc Immed." |
+| **6. Dist. Model** | **BD64** | Create Model View. Add Message Type with S/4 as Sender and CPI Logical System as Receiver. |
+| **7. CPI IFlow** | **Design / Monitor** | Configure **IDoc/HTTPS Sender Adapter**. Match the endpoint URL with the SM59 Path Prefix. |
+
+---
+
+### **Part 2: Inbound Configuration (CPI → S/4HANA)**
+This setup allows CPI to post data into S/4HANA (typically via SAP Cloud Connector).
+
+| Step | Transaction / Component | Action & Key Settings |
+| :--- | :--- | :--- |
+| **1. Cloud Connector** | **SCC (Cloud)** | Map Virtual Host/Port to S/4 Internal Host/Port. Add Resource: `/sap/bc/srt/idoc` (Access: Path & Subpaths). |
+| **2. Activate Service** | **SICF / SRTIDOC** | Activate service `/sap/bc/srt/idoc`. Use **SRTIDOC** to register the service for IDoc SOAP processing. |
+| **3. Partner Profile** | **WE20** | Under Partner Type **LS**, add Inbound Message Type. Assign a **Process Code** (e.g., `MATM` for Materials). |
+| **4. CPI IFlow** | **Design** | Use **IDoc Receiver Adapter**. Address: `http://<virtual_host>:<port>/sap/bc/srt/idoc`. Set Proxy Type to **On-Premise**. |
+| **5. Authentication** | **CPI Security** | Create "User Credentials" artifact in CPI for an S/4 user with IDoc posting authorizations. |
+
+---
+
+### **Part 3: Testing & Debugging**
+
+
+| Category | Transaction / Tool | Purpose & Steps |
+| :--- | :--- | :--- |
+| **Unit Testing** | **WE19** | **The Test Tool.** Copy an existing IDoc or create a new one. Click "Standard Outbound" to test S/4 → CPI, or "Inbound Function Module" to test CPI → S/4 logic. |
+| **Monitoring** | **WE02 / WE05** | **IDoc List.** Check status codes. **Status 03**: Successfully sent to CPI. **Status 53**: Successfully posted in S/4. **Status 51**: Application error in S/4. |
+| **Reprocessing** | **BD87** | **Reprocess.** If an IDoc fails due to temporary issues (locks/network), select the IDoc and hit "Process" to try again without creating a new record. |
+| **Network Debug** | **SM58 / SM59** | **Transactional RFC.** Check **SM58** for "Connection Refused" or "Unauthorized" errors if IDocs are stuck in status 02 or 30. |
+| **CPI Debugging** | **CPI Monitoring** | Enable **Trace Mode** in CPI to see the payload exactly as it arrived from S/4 or before it was sent to S/4. |
+| **Code Debugging** | **SE37** | To debug Inbound IDoc logic, set a breakpoint in the Function Module associated with the Process Code (found in **WE42**), then trigger via **WE19**. |
 
 
 
