@@ -70,24 +70,33 @@ Payload and header manipulation.
 ### **Content & Property Handling**
 
 * **Content Modifier**
-* **Write Variables** (Properties/Headers/Exchange)
-* **Content Deletion** *(removes body/attachments)*
 
 ### **Converters**
 
-* XML → JSON
 * JSON → XML
+* XML → JSON
 * CSV → XML
 * XML → CSV
+* EDI  → XML
+* XML  → EDI 
 
-### **Transformation Tools**
 
-* **Data Transform** *(Excel-like rules, new tool)*
-* **Filter** (XPath, JSONPath)
-* **Message Digest** (hashing – MD5, SHA-256)
-* **Encoder** (Base64, GZip, Zip)
-* **Decoder** (Base64, GZip, Zip)
+### **Decoder**
 
+* Base64 Decoder
+* Gzip Decompression
+* MIME Multipart Decoder
+* ZIP Decompression
+
+## EDI Extractor
+### Encoder
+* Base64 Encoder
+* Gzip Compression
+* MIME Multipart Encoder
+* ZIP Compression
+
+* **Message Digest** 
+  
 ### **Scripts**
 
 * **Groovy Script**
