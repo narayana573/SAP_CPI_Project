@@ -9,11 +9,11 @@ I have worked on  real time  scenarios based on business requirements.
 Technically i have designed End to End iFlows using pallet functions such as Content Modifier, Router, Splitter, **Request - Reply**, **Poll enrich**,
 **Aggregator** and **Message Mapping** and exception subprocess.
 
-and I have strong experience with adapters such as SFTP, HTTP, **IDOC, ODATA, JMS **and Process direct.
+and I have strong experience with adapters such as SFTP, HTTP, **IDOC, ODATA, JMS** and Process direct.
 
 4 >
-one of my strengths is implementing robust error handling and retry mechanism using JMS ques, data store operations, and automated email alerts. 
-I Ensure proper logging with Message Processing Logs monitoring and performance optimization to maintain product stability.
+one of my strengths is implementing robust error handling and retry mechanism using **JMS ques**, **data store operations**, and automated email alerts. 
+I Ensure proper logging with **Message Processing Logs monitoring** and performance optimization to maintain product stability.
 
 5 >
 I have been involved the complete lifecycle like 
