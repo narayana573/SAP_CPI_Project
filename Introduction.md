@@ -12,7 +12,6 @@ Aggregator and Message Mapping and exception subprocess.
 and I have strong experience with adapters such as SFTP, HTTP, IDOC, ODATA, JMS and Process direct.
 
 4 >
-
 one of my strengths is implementing robust error handling and retry mechanism using JMS ques, data store operations, and automated email alerts. 
 I Ensure proper logging with Message Processing Logs monitoring and performance optimization to maintain product stability.
 
