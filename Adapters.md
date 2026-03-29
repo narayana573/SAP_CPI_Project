@@ -4,7 +4,7 @@
 ---
 # ✅ **1. Message Pattern**
 
-### **SOAP RM**
+### **SAP RM**
 
 * Designed mainly for **asynchronous one-way** messaging.
 * Focuses on *reliable* delivery rather than immediate synchronous response.
@@ -22,7 +22,7 @@
 
 # ✅ **2. Reliability & Ordering**
 
-### **SOAP RM**
+### **SAP RM**
 
 * Built to comply with **WS-Reliable Messaging (WS-RM)** standards.
 * Guarantees:
@@ -65,7 +65,7 @@
 
 # ✅ **4. WSDL & Operation Support**
 
-### **SOAP RM**
+### **SAP RM**
 
 * Generally supports **one-way operations** only.
 * Request-reply support is limited or not supported depending on scenario.
@@ -84,7 +84,7 @@
 
 # ✅ **5. Technical Behavior**
 
-### **SOAP RM**
+### **SAP RM**
 
 * Creates a **sequence ID** for each message exchange.
 * Maintains a session to enforce order.
@@ -101,7 +101,7 @@
 
 # ⚡ Summary Table (Perfect for Interviews)
 
-| Feature             | SOAP 1.x              | SOAP RM                             |
+| Feature             | SOAP 1.x              | SAP RM                             |
 | ------------------- | --------------------- | ----------------------------------- |
 | Message Pattern     | Sync + Async          | Async (mostly)                      |
 | Reliability         | No built-in RM        | WS-Reliable Messaging               |
