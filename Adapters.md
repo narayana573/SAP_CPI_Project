@@ -111,9 +111,9 @@
 | Best For            | Third-party SOAP APIs | SAP ECC/S4/HANA/PI                  |
 | Delivery QoS        | Best effort           | Exactly Once (EO) / In Order (EOIO) |
 
-
- <img width="492" height="421" alt="image" src="https://github.com/user-attachments/assets/2c21db9b-8252-4250-baa4-f27a4e1dbfaf" />
- <img width="1070" height="887" alt="image" src="https://github.com/user-attachments/assets/fbb699ca-ffce-488b-8576-e5d5677b2d5b"/>              
+<img width="232" height="135" alt="image" src="https://github.com/user-attachments/assets/1bad345f-8a88-4fd4-b478-bec01805bdc6" />
+<img width="492" height="421" alt="image" src="https://github.com/user-attachments/assets/2c21db9b-8252-4250-baa4-f27a4e1dbfaf" />
+<img width="1070" height="887" alt="image" src="https://github.com/user-attachments/assets/fbb699ca-ffce-488b-8576-e5d5677b2d5b"/>              
 
 
 
