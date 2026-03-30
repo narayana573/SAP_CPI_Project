@@ -124,3 +124,7 @@ https://github.com/narayana573/SAP_CPI_Project/blob/main/Other_Modules/IDOC.md
 
 # 🔥 **SFTP**
 <img width="1402" height="728" alt="image" src="https://github.com/user-attachments/assets/843700b8-7fd0-40aa-92cc-69f756c8eada" />
+
+# 🔥 **HTTPS**
+<img width="580" height="346" alt="image" src="https://github.com/user-attachments/assets/b230293f-a2e8-4813-aa04-a7bd097b8425" />
+
