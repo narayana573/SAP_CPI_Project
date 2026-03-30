@@ -1,4 +1,5 @@
 <img width="1238" height="670" alt="image" src="https://github.com/user-attachments/assets/113de33d-7880-4421-bb0e-a99e0a9559d8" />
+<img width="573" height="288" alt="image" src="https://github.com/user-attachments/assets/2f74d3ad-50a8-4707-91f1-018ee2c93e95" />
 
 Based on the infographic provided, an **IDOC (Intermediate Document)** is a standard data container used to exchange information between SAP systems or between SAP and external applications. Think of it as a digital envelope that carries business data (like a purchase order or an invoice) from one place to another.
 
