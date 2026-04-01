@@ -171,3 +171,120 @@ These are used to manipulate how the mapping engine views the "levels" of the XM
 Since you are working with **UAT and Test Automation**, remember that Node Functions often cause the most "bugs" in mapping if the input XML context isn't what the developer expected. When a field "disappears" in the target, it’s usually because an `ifSwithoutElse` failed or a `removeContexts` was missing.
 
 Would you like me to create a **sample XML scenario** to show how one of these (like `useOneAsMany` or `ifwithoutElse`) changes the data output?
+
+Alright Surya, here’s a clean, crisp, interview-ready explanation without all the external links — **simple, sharp, and to the point**.
+
+---
+
+# ✅ **Remove Context vs Collapse Context — SAP CPI/PI Message Mapping**
+
+These two functions are used to handle **context changes** (i.e., hierarchy breaks) in SAP CPI/PI message mapping.
+
+Think of **contexts** as “groups of values separated by hierarchy levels.”
+These functions help you decide **how much of that grouping you want to preserve or ignore**.
+
+---
+
+# 🔹 **1. Remove Context ()**
+
+### **What it does**
+
+* Deletes **all** context levels.
+* Combines **all values** into **one single flat context**.
+* Nothing is filtered out; everything is kept.
+
+### **Example**
+
+**Input (with contexts):**
+
+```
+(A)
+  10
+  20
+(B)
+  30
+(C)
+  40
+  50
+```
+
+**After REMOVE CONTEXT:**
+
+```
+10
+20
+30
+40
+50     → all values under ONE group
+```
+
+### **Where it's used**
+
+* When you need to **flatten** a nested structure.
+* When you want to process all items together.
+* Typical use: mapping a list of repeating structures to a flat list.
+
+---
+
+# 🔹 **2. Collapse Context ()**
+
+### **What it does**
+
+* Removes all context changes **BUT keeps only the FIRST value** of each original context.
+* So it both **flattens + filters**.
+
+### **Example**
+
+**Input (with contexts):**
+
+```
+(A)
+  10
+  20
+(B)
+  30
+(C)
+  40
+  50
+```
+
+**After COLLAPSE CONTEXT:**
+
+```
+10   → first of A  
+30   → first of B  
+40   → first of C  
+```
+
+### **Where it's used**
+
+* When you want **only the first item from each group**.
+* Useful for situations like:
+
+  * picking the first line item per invoice
+  * extracting header-level info from item groups
+  * reducing repeated data logically
+
+---
+
+# 🔥 **Key Difference (Easy to Remember)**
+
+| Function             | Removes All Contexts? | Keeps All Values? | Keeps First Value Only? |
+| -------------------- | --------------------- | ----------------- | ----------------------- |
+| **Remove Context**   | ✔️                    | ✔️                | ❌                       |
+| **Collapse Context** | ✔️                    | ❌                 | ✔️                      |
+
+**In simple words:**
+👉 **Remove Context = flatten everything**
+👉 **Collapse Context = flatten but only keep the first of each group**
+
+---
+
+# 🎯 **Interview One-Line Summary**
+
+* **Remove Context**: Flattens the structure completely; keeps all values.
+* **Collapse Context**: Flattens the structure but keeps only the first value of each context group.
+
+---
+
+
