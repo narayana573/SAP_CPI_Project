@@ -113,35 +113,25 @@ You access the interface using its **endpoint URL**, seen in *Monitor → Endpoi
 
 
 ### 📌 **Key Capabilities in SAP Integration Suite (CPI ecosystem)**
+###### Cloud Integration
 
-#### 🔹 1. **Cloud Integration**
+###### API Management
 
-Your main CPI — used for building and running integration flows.
+###### Event Mesh
 
-#### 🔹 2. **API Management**
+###### Open Connectors
 
-Expose iFlows or backend services as secure APIs.
+###### Integration Advisor
 
-#### 🔹 3. **Open Connectors**
+###### Trading Partner Management
 
-Pre-built connectors for 160+ SaaS apps (e.g., Salesforce, HubSpot).
+###### OData Provisioning
 
-#### 🔹 4. **Integration Advisor**
+###### Data Space Integration
 
-AI-based mapping suggestions, MIG/MAP creation.
+###### Integration Assessment
 
-#### 🔹 5. **Event Mesh**
-
-Event-driven integration using publish/subscribe.
-
-#### 🔹 6. **Trading Partner Management (TPM)**
-
-B2B integrations (EDIFACT, X12, AS2).
-
-#### 🔹 7. **Graph**
-
-Unified data graph for querying across systems.
-
+###### Migration Assessment
 ---
 
 ---
