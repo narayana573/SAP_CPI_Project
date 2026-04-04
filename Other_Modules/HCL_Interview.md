@@ -213,7 +213,9 @@ My work primarily involves SFTP, HTTP, SOAP, OData, and IDoc adapters."
 
 **Corrected Answer:**
 
-Re check the flow how to create it
+<img width="547" height="486" alt="image" src="https://github.com/user-attachments/assets/f11616b1-6aee-448a-b9bb-3b8935e2abdd" />
+<img width="1538" height="487" alt="image" src="https://github.com/user-attachments/assets/f5accae9-5417-4924-bb36-0f84b62d01ce" />
+
 
 ---
 
