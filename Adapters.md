@@ -3,6 +3,9 @@ https://help.sap.com/docs/integration-suite/sap-integration-suite/configure-jms-
 
 https://help.sap.com/docs/integration-suite/sap-integration-suite/configure-jms-receiver-adapter
 
+# 🔥 **RFC**
+https://help.sap.com/docs/cloud-integration/sap-cloud-integration/rfc-receiver-adapter
+
 # 🔥 **SOAP**
 ---
 # ✅ **1. Message Pattern**
