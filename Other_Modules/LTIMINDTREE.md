@@ -39,19 +39,23 @@
 
 18. How does the behavior change in Sequential Multicast?
 
-19. How strong are your skills in Groovy scripting?
+    
+19. One Message need to send to multiple Recivers , how you will send?
 
-20. Can you review a given Groovy script and summarize what it does?
+ 
+20. How strong are your skills in Groovy scripting?
 
-21. What Camel expression is used to get the current date and time?
+21. Can you review a given Groovy script and summarize what it does?
 
-22. What Camel expression is used for exception handling and logging errors?
+22. What Camel expression is used to get the current date and time?
 
-23. Can you explain your current project?
+23. What Camel expression is used for exception handling and logging errors?
 
-24. Can you describe one critical integration flow, including palette elements and adapters used?
+24. Can you explain your current project?
 
-25. Do you have any questions for us? (e.g., about the project or business requirements)
+25. Can you describe one critical integration flow, including palette elements and adapters used?
+
+26. Do you have any questions for us? (e.g., about the project or business requirements)
 
 ---
 
