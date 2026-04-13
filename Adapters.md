@@ -1,6 +1,8 @@
 # 🔥 **JMS**
 https://help.sap.com/docs/integration-suite/sap-integration-suite/configure-jms-sender-adapter
 
+https://help.sap.com/docs/integration-suite/sap-integration-suite/configure-jms-receiver-adapter
+
 # 🔥 **SOAP**
 ---
 # ✅ **1. Message Pattern**
