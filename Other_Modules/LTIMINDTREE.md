@@ -59,3 +59,16 @@
 
 ---
 
+# LTI interview Kristna 23Apr 2026:
+
+1. Can you please tell me about yourself and your experience in SAP CPI?
+2. What type of adapters have you worked with?
+3. Have you worked on SuccessFactors?
+4. What type of exception handling mechanisms do you use in your artifacts so that the client will get the error, and how do you reprocess that message after a failure?
+5. What type of details do you include in the errors you send when an error occurs?
+6. How do you notify the customer that there was an error in CPI, considering you cannot keep trace mode enabled all the time?
+7. What is a message ID and what is a correlation ID?
+8. What is the "Write variable" in CPI?
+9. How do you call the data stored in the exchange property of a content modifier at the message mapping level?
+10. Do you have any questions for me?
+
