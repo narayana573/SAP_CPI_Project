@@ -530,5 +530,172 @@ A: IDoc is SAP's own document format for ALE-based messaging. SOAP is a general 
 A: CSRF (Cross-Site Request Forgery) token is required by SAP OData services for write operations (POST/PUT/DELETE). First, do a GET with `X-CSRF-Token: Fetch`, then use the returned token in subsequent write requests.
 
 ---
+# 🔥 SAP CPI — AMQP Adapter Interview Notes
 
+> **Protocol:** AMQP 1.0 | Connects CPI to **external** message brokers
+
+---
+
+## What is AMQP?
+
+- **Advanced Message Queuing Protocol** — open standard for async messaging.
+- CPI supports **AMQP 1.0 only** (⚠️ RabbitMQ uses 0.9.1 by default — needs plugin).
+- Used to connect CPI to **external** brokers: Azure Service Bus, SAP Event Mesh, Solace, ActiveMQ.
+- Unlike **JMS** (CPI-internal), AMQP talks to **outside systems**.
+
+---
+
+## Adapter Directions
+
+| Adapter | Role | Flow |
+|---------|------|------|
+| **Sender** | CPI **reads/consumes** from broker | Broker → CPI |
+| **Receiver** | CPI **writes/produces** to broker | CPI → Broker |
+
+---
+
+## Transport Protocols — TCP vs WebSocket
+
+| Feature | TCP | WebSocket |
+|---------|-----|-----------|
+| Port | 5671 (TLS) / 5672 (plain) | **443** |
+| Firewall | ❌ Needs port open | ✔ Uses HTTPS port |
+| Auth | SASL, Client Certificate | SASL, **OAuth2** |
+| TLS | Optional (checkbox) | Default (WSS) |
+| SAP Event Mesh | ❌ | ✔ Recommended |
+| Azure Service Bus | ✔ TLS over TCP | ✔ |
+| On-Premise (CC) | ✔ | ✔ (CC mapping = TCP) |
+
+> 💡 **WebSocket = port 443** — preferred for cloud brokers (no firewall issues).  
+> 💡 **OAuth2** is only available with **WebSocket** transport.  
+> 💡 **Client Certificate** is only available with **TCP** transport.
+
+---
+
+## WebSocket Configuration (SAP Event Mesh Example)
+
+```
+Transport Protocol : WebSocket
+Host               : enterprise-messaging-messaging-gateway.cfapps.<region>.hana.ondemand.com
+Port               : 443
+Path               : /protocols/amqp10ws
+Authentication     : OAuth2 Client Credentials
+Credential Name    : <alias of deployed OAuth2 credential>
+Queue Name         : queue:<your-queue-name>
+```
+
+**How to set up OAuth2 for Event Mesh:**
+1. Get the service key from your BTP Event Mesh instance.
+2. Find the `amqp10ws` section → copy Host, Port, Path.
+3. In CPI → `Monitor → Security Material → Add OAuth2 Client Credentials`.
+4. Use `clientid`, `clientsecret`, `tokenendpoint` from the service key.
+5. Reference the credential alias in the adapter's **Credential Name** field.
+
+---
+
+## Key Configuration Properties
+
+### Connection Tab
+| Property | Description |
+|----------|-------------|
+| Host | Broker hostname |
+| Port | Broker port |
+| Proxy Type | `Internet` (direct) / `On-Premise` (Cloud Connector) |
+| Path | *(WebSocket only)* e.g. `/protocols/amqp10ws` |
+| Connect with TLS | Enable TLS (TCP only; auto-on for Client Cert) |
+| Location ID | *(On-Premise only)* Cloud Connector Location ID |
+| Authentication | SASL / OAuth2 / Client Certificate / None |
+| Credential Name | Alias of deployed credentials |
+
+### Processing Tab — Sender
+| Property | Description |
+|----------|-------------|
+| Queue Name | `queue:<n>` for Event Mesh; plain name for others |
+| No. of Processes | Parallel workers (default: 1, max: 99) |
+| Max Prefetch Messages | Messages pre-fetched per worker (1–100) |
+| Max. Number of Retries | Retries before failure status sent (default: 0) |
+| Delivery Status After Max Retries | `REJECTED` → DLQ / `MODIFIED_FAILED_UNDELIVERABLE` |
+
+### Processing Tab — Receiver
+| Property | Description |
+|----------|-------------|
+| Queue / Topic Name | Destination on the broker |
+| Delivery | `Persistent` (survives restart) / `Non-Persistent` (faster, lossy) |
+
+---
+
+## Queue vs Topic Syntax
+
+| Type | Syntax | Adapter |
+|------|--------|---------|
+| Queue | `queue:<name>` | Sender + Receiver |
+| Topic | `topic:<name>` | Receiver only |
+| Topic Subscription | `<topic>/subscriptions/<sub>` | Sender only (Azure SB) |
+
+> ⚠️ Sender adapter **cannot consume directly from a topic** — must use a queue or topic subscription.
+
+---
+
+## Delivery Status & DLQ
+
+```
+Message fails in CPI
+      ↓
+Retries exhausted (Max. Retries reached)
+      ↓
+CPI sends → REJECTED → Broker routes to Dead Letter Queue (DLQ)
+```
+
+- **DLQ must be configured on the broker side** — CPI only sends the AMQP outcome.
+- `MODIFIED_FAILED_UNDELIVERABLE` is **not supported** on SAP Event Mesh & Solace — use `REJECTED`.
+
+---
+
+## Monitoring
+
+| Monitor | What It Shows |
+|---------|--------------|
+| **Poll Status** (Integration Content) | AMQP Sender consumption status |
+| **Message Processing Monitor** | Errors from AMQP Receiver |
+| **Broker's own tool** | Queue depth, DLQ — ❌ NOT in CPI |
+
+> 💡 Use **separate iFlows per queue** to avoid mixed MPL logs.
+
+---
+
+## Supported Brokers (Quick Ref)
+
+| Broker | Transport | Auth | Queue Prefix |
+|--------|-----------|------|-------------|
+| SAP Event Mesh | WebSocket (443) | OAuth2 | `queue:` |
+| Azure Service Bus | TCP TLS (5671) | SASL | None |
+| Solace PubSub+ | TCP / WebSocket | SASL / Client Cert | `queue:` |
+| ActiveMQ / Artemis | TCP / WebSocket | SASL | None |
+| Apache Qpid | TCP / WebSocket | SASL | None |
+
+---
+
+## Interview Q&A
+
+**Q: Difference between AMQP and JMS?**  
+A: JMS is CPI-internal (no external broker needed). AMQP connects to external brokers like Azure Service Bus or Solace.
+
+**Q: Why use WebSocket over TCP?**  
+A: WebSocket uses port **443** — no firewall changes needed. Also required for **OAuth2** authentication (e.g., SAP Event Mesh).
+
+**Q: Which AMQP version does CPI support?**  
+A: **AMQP 1.0 only**. RabbitMQ defaults to 0.9.1 — needs the AMQP 1.0 plugin.
+
+**Q: How does retry + DLQ work?**  
+A: Set `Max. Number of Retries` in the sender adapter. Once exceeded, CPI sends `REJECTED` to the broker which routes the message to the configured DLQ.
+
+**Q: How to connect to SAP Event Mesh via AMQP?**  
+A: WebSocket transport, port 443, path `/protocols/amqp10ws`, OAuth2 Client Credentials, queue name prefixed with `queue:`.
+
+**Q: Can the sender adapter consume directly from a topic?**  
+A: No — must use a queue or topic subscription. Topics are only supported in the **Receiver** adapter.
+
+---
+
+*SAP Integration Suite — AMQP Adapter Quick Reference*
 *Last Updated: 2025 | SAP Integration Suite — CPI Adapter Interview Reference*
