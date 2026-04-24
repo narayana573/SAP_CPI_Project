@@ -1,159 +1,534 @@
-# 🔥 **OData**
+# 📘 SAP CPI Adapters — Interview Notes
 
-<img width="702" height="441" alt="image" src="https://github.com/user-attachments/assets/6af395dc-ccaf-4b67-90c5-41ce834d78f7" />
-<img width="780" height="481" alt="image" src="https://github.com/user-attachments/assets/43762665-fb1f-4d1d-9c89-63979726148d" />
-<img width="1112" height="735" alt="image" src="https://github.com/user-attachments/assets/cbee14e0-8e91-40e5-a03e-771bc4941a96" />
-<img width="1580" height="672" alt="image" src="https://github.com/user-attachments/assets/12adb404-f2b5-4f62-afd0-eab7e4cf19c8" />
-
-
-
-
-
-
-
-# 🔥 **AdvanceEventMesh**
-
-https://github.com/narayana573/SAP_CPI_Project/blob/main/Other_Modules/AdvancedEventMesh.md
-
-https://community.sap.com/t5/technology-blog-posts-by-sap/advanced-event-mesh-basic-concepts/ba-p/13572050
-
-<img width="1737" height="517" alt="AdvanceEventMesh" src="https://github.com/user-attachments/assets/62852361-1429-44c4-b3f7-3a55080f2cda" />
-
-
-
-# 🔥 **JMS**
-https://help.sap.com/docs/integration-suite/sap-integration-suite/configure-jms-sender-adapter
-
-https://help.sap.com/docs/integration-suite/sap-integration-suite/configure-jms-receiver-adapter
-
-# 🔥 **RFC**
-https://help.sap.com/docs/cloud-integration/sap-cloud-integration/rfc-receiver-adapter
-
-# 🔥 **SOAP**
----
-# ✅ **1. Message Pattern**
-
-### **SAP RM**
-
-* Designed mainly for **asynchronous one-way** messaging.
-* Focuses on *reliable* delivery rather than immediate synchronous response.
-* Common when sender expects **fire-and-forget** messaging with guaranteed arrival.
-
-### **SOAP 1.x**
-
-* Supports both:
-
-  * **Synchronous (request-reply)**
-  * **Asynchronous (one-way)**
-* Works like a *regular*, generic SOAP web service adapter.
+> **Complete reference for SAP Integration Suite / Cloud Platform Integration (CPI) Adapters**
 
 ---
 
-# ✅ **2. Reliability & Ordering**
+## 📑 Table of Contents
 
-### **SAP RM**
-
-* Built to comply with **WS-Reliable Messaging (WS-RM)** standards.
-* Guarantees:
-
-  * Message delivery
-  * No duplicates
-  * Correct sequence/order
-* Retries automatically if messages fail.
-
-### **SOAP 1.x**
-
-* No built-in reliable messaging.
-* No guarantee of:
-
-  * Sequence ordering
-  * Exactly-once delivery
-* If reliability is needed, it must be handled at the integration or application level.
+1. [OData Adapter](#1-odata-adapter)
+2. [Advanced Event Mesh (AEM)](#2-advanced-event-mesh-aem)
+3. [JMS Adapter](#3-jms-adapter)
+4. [RFC Adapter](#4-rfc-adapter)
+5. [SOAP Adapter (SOAP 1.x vs SAP RM)](#5-soap-adapter-soap-1x-vs-sap-rm)
+6. [IDoc Adapter](#6-idoc-adapter)
+7. [SFTP Adapter](#7-sftp-adapter)
+8. [HTTPS / HTTP Adapter](#8-https--http-adapter)
+9. [Quick Comparison Summary](#9-quick-comparison-summary)
 
 ---
 
-# ✅ **3. Usage Scenarios**
+## 1. OData Adapter
 
-### **SOAP RM — When to Use**
+### What is OData?
+- **OData (Open Data Protocol)** is a REST-based protocol built on HTTP/HTTPS, used to expose and consume data as RESTful APIs.
+- Built on standards: **HTTP, AtomPub, JSON**.
+- Commonly used for **SAP Gateway**, **S/4HANA**, and **SuccessFactors** integrations.
 
-✔ Communicating with SAP backend systems requiring WS-RM
-✔ Integrating with **ECC**, **S/4HANA**, **PI/PO**, or legacy SAP stacks
-✔ When business cannot tolerate message loss (financial, logistics, updates)
+### OData Versions
+| Version | Notes |
+|---------|-------|
+| OData V2 | XML/JSON, widely used in SAP ECC/S4 Gateway |
+| OData V4 | JSON-first, improved query capabilities |
+
+### Key Operations (CRUD over HTTP)
+| HTTP Method | OData Operation | Description |
+|-------------|----------------|-------------|
+| GET | Read | Fetch entity or collection |
+| POST | Create | Create new entity |
+| PUT / PATCH | Update | Full / partial update |
+| DELETE | Delete | Delete entity |
+
+### Sender Adapter (OData)
+- Exposes CPI as an **OData service endpoint**.
+- External systems call CPI via OData URL.
+- Supports **GET, POST, PUT, DELETE**.
+
+### Receiver Adapter (OData)
+- CPI calls an **external OData service** (e.g., S/4HANA).
+- Configured with: Service URL, Operation (Query/Read/Create/Update/Delete), Entity set, Query options (`$filter`, `$select`, `$expand`).
+
+### Key Configuration Properties
+| Property | Description |
+|----------|-------------|
+| Address | Base URL of OData service |
+| Resource Path | Entity set path (e.g., `/SalesOrderSet`) |
+| Query Options | `$filter`, `$top`, `$skip`, `$expand` |
+| Authentication | Basic, OAuth2, Client Certificate |
+| CSRF Token | Required for POST/PUT/DELETE |
+
+### Interview Tips
+- OData uses **$metadata** endpoint to describe the data model.
+- **CSRF token** must be fetched first (via GET with `X-CSRF-Token: Fetch`) before write operations.
+- CPI can **paginate** large result sets using `$top` and `$skip`.
+
+![OData Architecture](https://github.com/user-attachments/assets/6af395dc-ccaf-4b67-90c5-41ce834d78f7)
+![OData Configuration](https://github.com/user-attachments/assets/43762665-fb1f-4d1d-9c89-63979726148d)
+![OData Query Options](https://github.com/user-attachments/assets/cbee14e0-8e91-40e5-a03e-771bc4941a96)
+![OData Flow Overview](https://github.com/user-attachments/assets/12adb404-f2b5-4f62-afd0-eab7e4cf19c8)
+
+---
+
+## 2. Advanced Event Mesh (AEM)
+
+### What is Advanced Event Mesh?
+- **SAP Advanced Event Mesh (AEM)** is a fully managed event streaming and management platform.
+- Based on **Solace PubSub+** technology.
+- Enables **event-driven architecture (EDA)** across hybrid and multi-cloud environments.
+- Supports protocols: **AMQP, MQTT, JMS, REST, WebSocket, SMF**.
+
+### Core Concepts
+| Concept | Description |
+|---------|-------------|
+| **Event Broker** | Central hub that routes events between producers and consumers |
+| **Topic** | Hierarchical address for routing messages (e.g., `order/created/EU`) |
+| **Queue** | Persistent storage for messages; ensures guaranteed delivery |
+| **Event Mesh** | Network of interconnected brokers across regions/clouds |
+| **Publisher** | Produces/sends events to a topic |
+| **Subscriber** | Consumes events from a topic or queue |
+
+### AEM vs JMS (Quick Comparison)
+| Feature | AEM | JMS |
+|---------|-----|-----|
+| Protocol | AMQP, MQTT, REST, SMF | JMS (javax.jms) |
+| Topology | Multi-cloud mesh | Local/CPI-managed queue |
+| Use Case | Event-driven, real-time streaming | Point-to-point, reliable async |
+| Persistence | Yes (queues + replay) | Yes (within CPI) |
+| Message Replay | ✔ Yes | ❌ No |
+
+### CPI Integration with AEM
+- CPI connects to AEM via the **Advanced Event Mesh sender/receiver adapter**.
+- **Sender**: CPI subscribes to an AEM topic/queue to receive events.
+- **Receiver**: CPI publishes events to AEM topics/queues.
+
+### Key Use Cases
+- Real-time event propagation between SAP and non-SAP systems.
+- Decoupling microservices in an event-driven architecture.
+- Fan-out messaging (one event → multiple consumers).
+- Cross-region event replication.
+
+### Interview Tips
+- AEM supports **dynamic topic routing** — topics can be hierarchical and wildcard subscriptions are possible.
+- Unlike JMS (which is CPI-internal), AEM is **external, multi-cloud**.
+- Supports **message replay** — consumers can re-read past events.
+
+![AEM Overview](https://github.com/user-attachments/assets/62852361-1429-44c4-b3f7-3a55080f2cda)
+
+---
+
+## 3. JMS Adapter
+
+### What is JMS?
+- **Java Message Service (JMS)** is an API for sending messages between two or more clients.
+- In SAP CPI, JMS uses an **internal message broker** (no external broker needed).
+- Enables **asynchronous, decoupled** communication within CPI iFlows.
+
+### Common Use Cases
+- **Decouple** sender and receiver iFlows (async processing).
+- **Retry handling** — messages stay in queue on failure.
+- **Parallel processing** — multiple consumers reading from same queue.
+- **Error handling** — dead-letter queue pattern.
+
+### Sender Adapter (JMS)
+- CPI **reads** messages from a JMS queue.
+- Can be combined with **Polling interval** or triggered when message arrives.
+- Key Properties:
+  - Queue Name
+  - Retry Interval
+  - Max Retry Count
+
+### Receiver Adapter (JMS)
+- CPI **writes** messages to a JMS queue.
+- Key Properties:
+  - Queue Name
+  - Retain Payload Header
+  - Expiration
+
+### Quality of Service (QoS)
+| QoS Level | Description |
+|-----------|-------------|
+| **AT LEAST ONCE** | Message delivered one or more times (possible duplicates) |
+| **EXACTLY ONCE** | Message delivered exactly once (uses duplicate check) |
+| **EXACTLY ONCE IN ORDER (EOIO)** | Delivered once, in sequence |
+
+### JMS Queue Management
+- Queues are managed in **CPI Operations Cockpit** (Message Queue Monitor).
+- Messages can be **retried**, **deleted**, or **moved** via UI.
+- CPI has a **JMS resource quota** — number of queues and messages is limited by license.
+
+### Key Interview Questions
+- **Q: What happens if the JMS queue is full?**  
+  A: New messages are rejected; sender iFlow will fail with a queue capacity error.
+- **Q: How to implement retry with JMS?**  
+  A: Configure Max Retries + Dead Letter Queue (DLQ) in the JMS sender adapter.
+- **Q: Difference between JMS and AEM?**  
+  A: JMS is CPI-internal; AEM is external/multi-cloud with advanced routing and replay.
+
+📖 Reference: [JMS Sender Adapter](https://help.sap.com/docs/integration-suite/sap-integration-suite/configure-jms-sender-adapter) | [JMS Receiver Adapter](https://help.sap.com/docs/integration-suite/sap-integration-suite/configure-jms-receiver-adapter)
+
+---
+
+## 4. RFC Adapter
+
+### What is RFC?
+- **Remote Function Call (RFC)** is SAP's proprietary protocol for calling function modules in SAP ABAP systems.
+- Used to integrate CPI with **SAP ECC**, **S/4HANA**, **BW**, etc.
+- CPI supports **RFC Receiver Adapter** only (not sender).
+
+### Types of RFC
+| Type | Description |
+|------|-------------|
+| **sRFC** (Synchronous RFC) | Caller waits for response |
+| **aRFC** (Asynchronous RFC) | Caller does not wait |
+| **tRFC** (Transactional RFC) | Guaranteed once delivery |
+| **qRFC** (Queued RFC) | tRFC with ordering (EOIO) |
+
+### RFC Receiver Adapter in CPI
+- CPI acts as **client**, calling a **BAPI or Function Module** in SAP.
+- Uses **SAP JCo (Java Connector)** under the hood.
+- Requires **On-Premise connectivity** via **Cloud Connector**.
+
+### Configuration Properties
+| Property | Description |
+|----------|-------------|
+| Target System | SAP system alias configured in Cloud Connector |
+| Function Module / BAPI | Name of the RFC-enabled function |
+| Input Parameters | Mapped from CPI message |
+| Output Parameters | Result mapped back to CPI message |
+
+### Cloud Connector Requirement
+- RFC calls go through **SAP Cloud Connector** (SCC) which creates a secure tunnel between CPI (cloud) and on-premise SAP system.
+- SCC must expose the SAP system as a **back-end resource**.
+
+### Common BAPIs Used
+- `BAPI_SALESORDER_CREATEFROMDAT2` — Create Sales Order
+- `BAPI_MATERIAL_GETLIST` — Get Material List
+- `RFC_READ_TABLE` — Read any SAP table
+
+### Interview Tips
+- RFC Adapter is **receiver only** in CPI — CPI always calls SAP, not the other way.
+- For SAP-to-CPI calls, use **SOAP** or **HTTP** adapter, not RFC.
+- RFC requires **SAP JCo libraries** and **Cloud Connector** configuration.
+
+📖 Reference: [RFC Receiver Adapter](https://help.sap.com/docs/cloud-integration/sap-cloud-integration/rfc-receiver-adapter)
+
+---
+
+## 5. SOAP Adapter (SOAP 1.x vs SAP RM)
+
+### What is SOAP?
+- **SOAP (Simple Object Access Protocol)** is an XML-based messaging protocol over HTTP/HTTPS.
+- Uses **WSDL** to describe the service contract.
+- CPI supports both **SOAP 1.x** and **SAP RM (Reliable Messaging)** variants.
+
+---
+
+### ✅ 1. Message Pattern
+
+#### SOAP 1.x
+- Supports both **Synchronous (request-reply)** and **Asynchronous (one-way)**.
+- Works like a standard SOAP web service adapter.
+
+#### SAP RM
+- Designed mainly for **asynchronous one-way** messaging.
+- Focuses on *reliable* delivery rather than synchronous response.
+- Common for **fire-and-forget** messaging with guaranteed arrival.
+
+---
+
+### ✅ 2. Reliability & Ordering
+
+#### SAP RM
+- Complies with **WS-Reliable Messaging (WS-RM)** standards.
+- Guarantees:
+  - Message delivery
+  - No duplicates
+  - Correct sequence/order
+- Retries automatically if messages fail.
+
+#### SOAP 1.x
+- No built-in reliable messaging.
+- No guarantee of sequence ordering or exactly-once delivery.
+- Reliability must be handled at integration/application level.
+
+---
+
+### ✅ 3. Usage Scenarios
+
+#### SOAP RM — When to Use
+- Communicating with SAP backend systems requiring WS-RM.
+- Integrating with **ECC**, **S/4HANA**, **PI/PO**, or legacy SAP stacks.
+- When business cannot tolerate message loss (financial, logistics).
 
 **Typical use:** IDocs over SOAP RM, PI-style async messages, ALE-style messaging.
 
-### **SOAP 1.x — When to Use**
+#### SOAP 1.x — When to Use
+- Integrations with **third-party web services**.
+- Standard SOAP API consumption.
+- When a system provides a typical WSDL with request/response structures.
 
-✔ Integrations with **third-party web services**
-✔ Standard SOAP API consumption
-✔ When a system provides a typical WSDL with request/response structures
-
-**Typical use:** Calling CRM APIs, vendor SOAP services, payment services, etc.
-
----
-
-# ✅ **4. WSDL & Operation Support**
-
-### **SAP RM**
-
-* Generally supports **one-way operations** only.
-* Request-reply support is limited or not supported depending on scenario.
-* WSDLs with multiple operations or complex patterns may not work.
-
-### **SOAP 1.x**
-
-* Fully compatible with:
-
-  * Request-reply operations
-  * Document-literal WSDLs
-  * Complex schemas
-* Easier to integrate with standard web service providers.
+**Typical use:** Calling CRM APIs, vendor SOAP services, payment services.
 
 ---
 
-# ✅ **5. Technical Behavior**
+### ✅ 4. WSDL & Operation Support
 
-### **SAP RM**
-
-* Creates a **sequence ID** for each message exchange.
-* Maintains a session to enforce order.
-* Retries delivery if the receiving system is down.
-* Ensures **QoS = Exactly Once In Order (EOIO).**
-
-### **SOAP 1.x**
-
-* Works like a simple SOAP transport.
-* Delivers messages as they come.
-* No retry mechanism unless configured separately.
+| Feature | SOAP 1.x | SAP RM |
+|---------|----------|--------|
+| Request-Reply | ✔ Yes | Limited |
+| One-Way | ✔ Yes | ✔ Yes (primary) |
+| Complex WSDLs | ✔ Full | Limited |
+| Multi-operation WSDL | ✔ Yes | ❌ Restricted |
 
 ---
 
-# ⚡ Summary Table (Perfect for Interviews)
+### ✅ 5. Technical Behavior
 
-| Feature             | SOAP 1.x              | SAP RM                             |
-| ------------------- | --------------------- | ----------------------------------- |
-| Message Pattern     | Sync + Async          | Async (mostly)                      |
-| Reliability         | No built-in RM        | WS-Reliable Messaging               |
-| Order Guarantee     | ❌ No                  | ✔ Yes                               |
-| Duplicate Avoidance | ❌ No                  | ✔ Yes                               |
-| WSDL Support        | Full & flexible       | Limited (mostly one-way)            |
-| Best For            | Third-party SOAP APIs | SAP ECC/S4/HANA/PI                  |
-| Delivery QoS        | Best effort           | Exactly Once (EO) / In Order (EOIO) |
+#### SAP RM
+- Creates a **sequence ID** for each message exchange.
+- Maintains a session to enforce order.
+- Retries delivery if the receiving system is down.
+- Ensures **QoS = Exactly Once In Order (EOIO)**.
 
-<img width="232" height="135" alt="image" src="https://github.com/user-attachments/assets/1bad345f-8a88-4fd4-b478-bec01805bdc6" />
-<img width="492" height="421" alt="image" src="https://github.com/user-attachments/assets/2c21db9b-8252-4250-baa4-f27a4e1dbfaf" />
-<img width="1070" height="887" alt="image" src="https://github.com/user-attachments/assets/fbb699ca-ffce-488b-8576-e5d5677b2d5b"/>              
-
-
+#### SOAP 1.x
+- Works like a simple SOAP transport.
+- No retry mechanism unless configured separately.
 
 ---
 
-# 🔥 **IDOC**
-https://github.com/narayana573/SAP_CPI_Project/blob/main/Other_Modules/IDOC.md
+### ⚡ Summary Table
 
-# 🔥 **SFTP**
-<img width="1402" height="728" alt="image" src="https://github.com/user-attachments/assets/843700b8-7fd0-40aa-92cc-69f756c8eada" />
+| Feature | SOAP 1.x | SAP RM |
+|---------|----------|--------|
+| Message Pattern | Sync + Async | Async (mostly) |
+| Reliability | No built-in RM | WS-Reliable Messaging |
+| Order Guarantee | ❌ No | ✔ Yes |
+| Duplicate Avoidance | ❌ No | ✔ Yes |
+| WSDL Support | Full & flexible | Limited (mostly one-way) |
+| Best For | Third-party SOAP APIs | SAP ECC/S4HANA/PI |
+| Delivery QoS | Best effort | Exactly Once (EO) / In Order (EOIO) |
 
-# 🔥 **HTTPS**
-<img width="580" height="346" alt="image" src="https://github.com/user-attachments/assets/b230293f-a2e8-4813-aa04-a7bd097b8425" />
+![SOAP Adapter Types](https://github.com/user-attachments/assets/1bad345f-8a88-4fd4-b478-bec01805bdc6)
+![SOAP Configuration](https://github.com/user-attachments/assets/2c21db9b-8252-4250-baa4-f27a4e1dbfaf)
+![SOAP vs SAP RM Comparison](https://github.com/user-attachments/assets/fbb699ca-ffce-488b-8576-e5d5677b2d5b)
 
+---
+
+## 6. IDoc Adapter
+
+### What is IDoc?
+- **IDoc (Intermediate Document)** is SAP's standard data container format for asynchronous inter-system communication.
+- Used for exchanging business documents (orders, deliveries, invoices) between SAP systems and third parties.
+- Each IDoc has a **Control Record**, **Data Records**, and **Status Records**.
+
+### IDoc Structure
+```
+IDoc
+├── Control Record (Header: sender, receiver, message type)
+├── Data Records (Segments: actual business data)
+└── Status Records (Processing status)
+```
+
+### Key Terminology
+| Term | Description |
+|------|-------------|
+| **Message Type** | Business context (e.g., ORDERS, DESADV, INVOIC) |
+| **Basic Type** | IDoc structure/template (e.g., ORDERS05) |
+| **Extension** | Custom fields added to Basic Type |
+| **Partner Profile** | Configuration for sending/receiving IDocs |
+| **Port** | Communication channel (ALE port, file port) |
+
+### IDoc Adapter in CPI
+- CPI supports **IDoc Sender** and **IDoc Receiver** adapters.
+- Used for integrating CPI with **SAP ECC/S4HANA** via ALE/IDoc.
+
+#### IDoc Sender (SAP → CPI)
+- SAP system sends IDoc to CPI endpoint.
+- CPI processes and forwards to target system.
+
+#### IDoc Receiver (CPI → SAP)
+- CPI sends IDoc to SAP system.
+- SAP posts IDoc and triggers business processing.
+
+### Common IDoc Message Types
+| Message Type | Business Scenario |
+|-------------|-------------------|
+| ORDERS | Purchase Order |
+| ORDRSP | Order Response |
+| DESADV | Delivery/Despatch Advice |
+| INVOIC | Invoice |
+| MATMAS | Material Master |
+| DEBMAS | Customer Master |
+
+### Interview Tips
+- IDoc is always **asynchronous**.
+- IDoc uses **tRFC/qRFC** under the hood for reliable delivery.
+- In CPI, IDocs are converted to/from **XML** for processing.
+- Use **SOAP RM adapter** when IDocs are sent over SOAP (WS-based IDoc).
+
+📖 Reference: [IDoc Module](https://github.com/narayana573/SAP_CPI_Project/blob/main/Other_Modules/IDOC.md)
+
+---
+
+## 7. SFTP Adapter
+
+### What is SFTP?
+- **SFTP (SSH File Transfer Protocol)** is a secure protocol for transferring files over SSH.
+- Used for file-based integration patterns (batch, bulk data exchange).
+- Commonly used with legacy systems, banks, EDI partners.
+
+### SFTP Sender Adapter
+- CPI **polls** an SFTP server for new files at a configured interval.
+- Downloads files for processing.
+
+#### Key Configuration Properties
+| Property | Description |
+|----------|-------------|
+| Host | SFTP server hostname/IP |
+| Port | Default: 22 |
+| Credential Name | SSH username + password or private key |
+| Directory | Remote folder path to poll |
+| File Pattern | Filter files (e.g., `*.csv`, `order_*.xml`) |
+| Polling Interval | How often CPI checks for new files |
+| Post-Processing | Delete / Archive / Move file after processing |
+| Idempotent Check | Avoid reprocessing same file |
+
+### SFTP Receiver Adapter
+- CPI **writes/uploads** processed files to an SFTP server.
+
+#### Key Configuration Properties
+| Property | Description |
+|----------|-------------|
+| Host / Port | SFTP server details |
+| Directory | Target upload folder |
+| File Name | Static or dynamic (use headers/properties) |
+| Duplicate Handling | Overwrite / Append / Throw Error |
+| Create Directories | Auto-create missing folders |
+
+### Authentication Types
+| Type | Description |
+|------|-------------|
+| Username/Password | Basic credentials |
+| Public Key (RSA) | SSH key-pair authentication (more secure) |
+| Known Hosts File | Verify server identity |
+
+### Post-Processing Options (Sender)
+| Option | Behavior |
+|--------|----------|
+| Delete | File deleted after successful processing |
+| Archive | Moved to archive folder |
+| Move | Moved to another directory |
+| Keep | File stays in source folder |
+
+### Interview Tips
+- SFTP adapter uses **polling** — it checks the directory at set intervals.
+- Use **idempotent file name** option to avoid duplicate processing.
+- Dynamic file names: Use `${header.CamelFileName}` or `${property.fileName}` expressions.
+- SFTP connects through **Cloud Connector** for on-premise SFTP servers.
+
+![SFTP Adapter Configuration](https://github.com/user-attachments/assets/843800d8-7fd0-40aa-92cc-69f756c8eada)
+
+---
+
+## 8. HTTPS / HTTP Adapter
+
+### What is HTTPS Adapter?
+- **HTTPS (HTTP Sender)** adapter exposes CPI integration flow as a **REST/HTTP endpoint**.
+- External systems call CPI via HTTPS URL.
+- Supports: **GET, POST, PUT, DELETE, PATCH**.
+
+### HTTP Sender Adapter
+- Exposes CPI iFlow as an **inbound HTTP(S) endpoint**.
+- External systems (Postman, apps, cloud services) send requests to CPI.
+
+#### Key Configuration Properties
+| Property | Description |
+|----------|-------------|
+| Address | Relative path of the endpoint (e.g., `/orders`) |
+| Authorization | Role-based (iFlows require `ESBMessaging.send` role) |
+| CSRF Token Protection | Optional, for REST clients |
+| Message Exchange Pattern | Request-Reply or One-Way |
+
+### HTTP Receiver Adapter
+- CPI calls an **external HTTP(S) service**.
+- Sends HTTP requests to third-party REST APIs.
+
+#### Key Configuration Properties
+| Property | Description |
+|----------|-------------|
+| URL | Target service URL |
+| Method | GET / POST / PUT / DELETE / PATCH |
+| Authentication | None, Basic, OAuth2, Client Certificate |
+| Headers | Custom HTTP headers |
+| Query Parameters | URL query string params |
+| Timeout | Connection + response timeout |
+
+### Authentication Options
+| Type | Use Case |
+|------|----------|
+| Basic Authentication | Username/password |
+| OAuth 2.0 | Token-based (recommended for modern APIs) |
+| Client Certificate | Mutual TLS (mTLS) |
+| None | Open/public endpoints |
+
+### HTTP vs HTTPS Adapter
+| Feature | HTTP | HTTPS |
+|---------|------|-------|
+| Security | Unencrypted | TLS encrypted |
+| Recommended? | ❌ Not for production | ✔ Always preferred |
+| Certificate | Not needed | SSL/TLS cert required |
+
+### CPI Endpoint URL Format
+```
+https://<tenant>.it-cpi001.cfapps.sap.hana.ondemand.com/http/<your-relative-path>
+```
+
+### Interview Tips
+- HTTPS sender requires the client to have the `ESBMessaging.send` role assigned.
+- Use **OAuth2** (Client Credentials) for system-to-system calls.
+- HTTP adapter can call any REST API — SAP, Salesforce, external services.
+- Response handling: Use **Content Modifier** or **Message Mapping** to process response payload.
+
+![HTTPS Adapter Overview](https://github.com/user-attachments/assets/b230293f-a2e8-4813-aa04-a7bd097b8425)
+
+---
+
+## 9. Quick Comparison Summary
+
+| Adapter | Direction | Protocol | Sync/Async | Best For |
+|---------|-----------|----------|-----------|----------|
+| **OData** | Sender + Receiver | HTTP/HTTPS + OData | Both | SAP Gateway, S/4HANA APIs |
+| **AEM** | Sender + Receiver | AMQP, MQTT, REST | Async | Event-driven, multi-cloud |
+| **JMS** | Sender + Receiver | JMS (internal) | Async | Decouple iFlows, retry handling |
+| **RFC** | Receiver only | RFC (SAP JCo) | Both | BAPI/FM calls to SAP on-prem |
+| **SOAP 1.x** | Sender + Receiver | SOAP over HTTP | Both | Third-party SOAP web services |
+| **SAP RM** | Sender + Receiver | SOAP + WS-RM | Async | SAP ECC/S4 reliable messaging |
+| **IDoc** | Sender + Receiver | IDoc/ALE | Async | SAP-to-SAP document exchange |
+| **SFTP** | Sender + Receiver | SFTP (SSH) | Async (polling) | File-based batch integrations |
+| **HTTPS/HTTP** | Sender + Receiver | HTTP/HTTPS | Both | REST APIs, generic web services |
+
+---
+
+## 🎯 Common Interview Questions
+
+**Q1: When would you use JMS over AEM?**  
+A: JMS is for CPI-internal async decoupling (lightweight, no extra cost). AEM is for enterprise event-driven architecture across multiple systems/clouds with advanced routing and replay.
+
+**Q2: What is the difference between SOAP 1.x and SAP RM adapter?**  
+A: SOAP 1.x is for standard SOAP web services (sync + async). SAP RM adds WS-Reliable Messaging for guaranteed, ordered, duplicate-free delivery — used for SAP backend integrations.
+
+**Q3: Why use RFC adapter instead of SOAP for SAP integration?**  
+A: RFC provides direct function module/BAPI calls to SAP ABAP systems without needing a web service. More suitable for tightly coupled SAP-SAP scenarios via Cloud Connector.
+
+**Q4: How does SFTP sender handle large files?**  
+A: CPI streams the file content. For very large files, use **Chunk Processing** with the Splitter step to process records in batches.
+
+**Q5: How is IDoc different from SOAP?**  
+A: IDoc is SAP's own document format for ALE-based messaging. SOAP is a general XML web service protocol. IDocs can be sent over SOAP RM (hybrid approach in newer SAP releases).
+
+**Q6: What is CSRF token and when is it needed?**  
+A: CSRF (Cross-Site Request Forgery) token is required by SAP OData services for write operations (POST/PUT/DELETE). First, do a GET with `X-CSRF-Token: Fetch`, then use the returned token in subsequent write requests.
+
+---
+
+*Last Updated: 2025 | SAP Integration Suite — CPI Adapter Interview Reference*
