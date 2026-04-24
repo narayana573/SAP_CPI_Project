@@ -2,6 +2,8 @@
 
 https://github.com/narayana573/SAP_CPI_Project/blob/main/Other_Modules/AdvancedEventMesh.md
 
+https://community.sap.com/t5/technology-blog-posts-by-sap/advanced-event-mesh-basic-concepts/ba-p/13572050
+
 <img width="1737" height="517" alt="AdvanceEventMesh" src="https://github.com/user-attachments/assets/62852361-1429-44c4-b3f7-3a55080f2cda" />
 
 
