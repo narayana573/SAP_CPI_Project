@@ -427,6 +427,7 @@ IDoc
 - SFTP connects through **Cloud Connector** for on-premise SFTP servers.
 <img width="477" height="592" alt="image" src="https://github.com/user-attachments/assets/372f5a71-66ef-4205-997b-8c37e0b42585" />
 <img width="752" height="386" alt="image" src="https://github.com/user-attachments/assets/7448b3dd-772c-488b-a3f0-eea33cb9a7c7" />
+<img width="687" height="667" alt="image" src="https://github.com/user-attachments/assets/44acd808-fa02-4c31-855b-d6e38b6580ba" />
 
 
 ---
