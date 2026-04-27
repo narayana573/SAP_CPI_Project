@@ -425,8 +425,9 @@ IDoc
 - Use **idempotent file name** option to avoid duplicate processing.
 - Dynamic file names: Use `${header.CamelFileName}` or `${property.fileName}` expressions.
 - SFTP connects through **Cloud Connector** for on-premise SFTP servers.
+<img width="477" height="592" alt="image" src="https://github.com/user-attachments/assets/372f5a71-66ef-4205-997b-8c37e0b42585" />
+<img width="752" height="386" alt="image" src="https://github.com/user-attachments/assets/7448b3dd-772c-488b-a3f0-eea33cb9a7c7" />
 
-![SFTP Adapter Configuration](https://github.com/user-attachments/assets/843800d8-7fd0-40aa-92cc-69f756c8eada)
 
 ---
 
