@@ -47,14 +47,9 @@ Common authentication types in SAP CPI:
 ## Q5. What are all the details you need to deploy OAuth SAML Bearer Assertion in SAP CPI?
 
 To configure **OAuth 2.0 – SAML Bearer Assertion** in CPI, you need:
+<img width="753" height="507" alt="image" src="https://github.com/user-attachments/assets/ad468d72-91a3-40f0-b3ca-70185cb050c1" />
+<img width="1186" height="595" alt="image" src="https://github.com/user-attachments/assets/2ea80310-4589-4a49-b465-b3e173da2a78" />
 
-1. **SAML Issuer** – The entity ID of the CPI tenant (identity provider).
-1. **Client ID** – The OAuth client ID registered in the target system (e.g., SuccessFactors).
-1. **Token Service URL** – The OAuth token endpoint of the target system.
-1. **Audience** – The target system’s audience/entity ID.
-1. **Key Pair / Private Key Alias** – The private key stored in the CPI Keystore used to sign the SAML assertion.
-1. **User Credential or Principal Propagation** – The user context to be propagated in the assertion.
-1. **Scope (optional)** – Required scopes if the target system demands them.
 
 **Steps in CPI:**
 
