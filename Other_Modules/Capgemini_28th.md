@@ -184,7 +184,8 @@ Also ensure:
 - **Key Algorithm** – RSA (most common) or EC.
 - **Key Size** – 2048-bit or 4096-bit.
 - **Validity Period** – Expiration date of the certificate.
-
+Monitor >> Manage Keystore >> Create Key Pair
+<img width="1186" height="595" alt="image" src="https://github.com/user-attachments/assets/2ea80310-4589-4a49-b465-b3e173da2a78" />
 **Useful for:**
 
 - **Signing SAML Assertions** (OAuth SAML Bearer Assertion flows).
