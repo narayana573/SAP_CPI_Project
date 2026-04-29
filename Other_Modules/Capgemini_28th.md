@@ -47,7 +47,9 @@ Common authentication types in SAP CPI:
 ## Q5. What are all the details you need to deploy OAuth SAML Bearer Assertion in SAP CPI?
 
 To configure **OAuth 2.0 – SAML Bearer Assertion** in CPI, you need:
+Monitor >> Manage Security Material >> Create OAuth2 SAML Bearer Assertion
 <img width="753" height="507" alt="image" src="https://github.com/user-attachments/assets/ad468d72-91a3-40f0-b3ca-70185cb050c1" />
+Monitor >> Manage Keystore >> Create Key Pair
 <img width="1186" height="595" alt="image" src="https://github.com/user-attachments/assets/2ea80310-4589-4a49-b465-b3e173da2a78" />
 
 
