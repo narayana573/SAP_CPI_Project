@@ -90,15 +90,43 @@ Monitor >> Manage Keystore >> Create Key Pair
 
 ## Q8. What is the difference between XML Modifier and Content Modifier?
 
-|Feature            |Content Modifier                                          |XML Modifier                                                       |
-|-------------------|----------------------------------------------------------|-------------------------------------------------------------------|
-|**Purpose**        |Set/modify message headers, properties, and body          |Modify specific XML elements/attributes in the payload             |
-|**Body Handling**  |Can replace the entire body with static or dynamic content|Targets specific nodes using XPath without replacing the whole body|
-|**Header/Property**|Can set exchange headers and properties                   |Cannot set headers or properties                                   |
-|**Use Case**       |Setting a property, injecting a static XML/JSON body      |Adding/updating a namespace, attribute, or element value in XML    |
-|**XPath Support**  |No direct XPath on payload                                |Yes – uses XPath expressions to locate nodes                       |
+### Content Modifier
+Used to **set or modify** the message body, headers, and exchange properties. It can replace the entire body with a static value, a constant, or a dynamic expression (XPath, Groovy, Simple expression). It does **not** touch the XML structure itself.
 
-**Summary:** Use **Content Modifier** for headers/properties or full body replacement. Use **XML Modifier** for surgical changes to specific XML nodes.
+### XML Modifier
+Used to **clean up XML structure** before further processing. It does **not** change element values or headers. According to the official SAP documentation, it supports exactly three operations:
+
+| Operation | Description |
+|---|---|
+| **Remove External DTDs** | Removes DTD declarations that contain external references (e.g., `SYSTEM "external.dtd"`). DTDs with external references are not supported in SAP CPI and can cause message processing to fail. |
+| **Remove XML Declaration** | Removes the `<?xml version='1.0' encoding='UTF-8' ?>` declaration from the payload. Useful when combining multiple XML payloads (e.g., after a Gather step) where duplicate XML declarations would break processing. |
+| **Invalid XML Character Handling** | Handles characters not valid in XML 1.0/1.1. Options: `None` (default), `Remove`, or `Substitute` (replaces with `#`). |
+
+---
+
+### Comparison Table
+
+| Feature | Content Modifier | XML Modifier |
+|---|---|---|
+| **Primary Purpose** | Set/modify body, headers, and exchange properties | Remove XML declarations, external DTDs, and invalid characters |
+| **Body Handling** | Replaces the entire body with static or dynamic content | Cleans the existing body without replacing it |
+| **Headers / Properties** | Yes — can create and modify both | No — cannot set headers or properties |
+| **XPath Support** | Yes — extracts values into headers/properties via XPath | No XPath support |
+| **XML Declaration Removal** | No | Yes — dedicated checkbox option |
+| **DTD Removal** | No | Yes — removes external DTD references |
+| **Invalid Character Handling** | No | Yes — Remove or Substitute options |
+| **Element/Value Changes** | Yes — full body can be rewritten | No — cannot modify element names or values |
+
+---
+
+### Key Takeaway
+
+> **Content Modifier** is for injecting or transforming message content (body, headers, properties).  
+> **XML Modifier** is purely a **sanitization step** — it removes XML declarations, external DTDs, and invalid characters to ensure safe downstream XML processing. It cannot change payload values or set headers.
+
+---
+
+
 
 -----
 
