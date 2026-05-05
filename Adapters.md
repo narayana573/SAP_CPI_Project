@@ -87,6 +87,75 @@
 | **Publisher** | Produces/sends events to a topic |
 | **Subscriber** | Consumes events from a topic or queue |
 
+# SAP Event Mesh vs. Advanced Event Mesh (AEM) — Quick Notes
+
+---
+
+## 🔍 What Are They?
+
+| | **SAP Event Mesh** | **SAP Integration Suite — Advanced Event Mesh (AEM)** |
+|---|---|---|
+| **Nature** | Lightweight event broker | Enterprise-grade event management platform |
+| **Best For** | Simple SAP integrations | Complex, large-scale event-driven architectures |
+| **Pricing** | Usage-based (cost-effective) | Enterprise licensing |
+
+---
+
+## ⚡ Key Capabilities at a Glance
+
+### SAP Event Mesh
+- ✅ Basic event streaming & integration
+- ✅ Native SAP BTP deployment
+- ✅ Great for SAP-to-SAP messaging
+- ❌ Limited governance & lifecycle management
+- ❌ Smaller payload & storage support
+
+### Advanced Event Mesh (AEM)
+- ✅ Full **event lifecycle governance** (design → publish → discover)
+- ✅ **Multi-cloud** deployment — AWS, Azure, GCP, on-prem, edge
+- ✅ **Message replay** for debugging & new consumer onboarding
+- ✅ **Event transactions** for data consistency
+- ✅ Large payload & high-volume storage
+- ✅ Enterprise compliance & control
+
+---
+
+## 📦 Technical Limits Comparison
+
+| Feature | Event Mesh | Advanced Event Mesh |
+|---|---|---|
+| **Max Message Size** | 1 MB | 30 MB |
+| **Storage Capacity** | 10 GB | 6 TB |
+| **Deployment** | SAP BTP only | Multi-cloud + on-prem + edge |
+| **Event Governance** | ❌ Basic | ✅ Full lifecycle |
+| **Message Replay** | ❌ | ✅ |
+| **Transactions** | ❌ | ✅ |
+
+---
+
+## 🧭 Decision Guide — Which One to Choose?
+
+| Scenario | Choose |
+|---|---|
+| Simple SAP-to-SAP event flows | **Event Mesh** |
+| Budget-sensitive / starter projects | **Event Mesh** |
+| Complex enterprise event architectures | **AEM** |
+| Need multi-cloud or on-prem deployment | **AEM** |
+| Require compliance & event governance | **AEM** |
+| Large payloads or high data volumes | **AEM** |
+| Event reuse, discovery, collaboration | **AEM** |
+
+---
+
+
+> **Event Mesh** = Lightweight, SAP-native, cost-effective. Ideal for simple integrations.
+>
+> **AEM** = Powerhouse, multi-cloud, governed. Ideal for enterprise-scale event-driven systems.
+
+---
+
+*Part of SAP Integration Suite | Event-Driven Architecture Series*
+
 ### AEM vs JMS (Quick Comparison)
 | Feature | AEM | JMS |
 |---------|-----|-----|
