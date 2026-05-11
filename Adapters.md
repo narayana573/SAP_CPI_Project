@@ -770,3 +770,41 @@ A: No — must use a queue or topic subscription. Topics are only supported in t
 
 *SAP Integration Suite — AMQP Adapter Quick Reference*
 *Last Updated: 2025 | SAP Integration Suite — CPI Adapter Interview Reference*
+
+
+# SAP Cloud Integration (CPI) – Top 15 Adapters
+
+
+---
+
+| # | Adapter Name | Transport Protocol | Message Call | Direction |
+|---|---|---|---|---|
+| 1 | **HTTPS / HTTP** | HTTP / HTTPS | Synchronous / Asynchronous | Sender & Receiver |
+| 2 | **SOAP** | HTTP / HTTPS | Synchronous (Request-Reply) | Sender & Receiver |
+| 3 | **IDoc** | HTTP / RFC | Asynchronous | Sender & Receiver |
+| 4 | **OData** | HTTP / HTTPS (OData V2 / V4) | Synchronous (CRUD) | Sender & Receiver |
+| 5 | **SFTP** | SSH / SFTP (SSH v2) | Asynchronous (File-based Polling) | Sender & Receiver |
+| 6 | **ProcessDirect** | Internal (In-Memory) | Synchronous | Sender & Receiver |
+| 7 | **RFC** | RFC / TCP (via Cloud Connector) | Synchronous (Request-Reply) | Receiver |
+| 8 | **JMS** | JMS (Internal Embedded Message Broker) | Asynchronous (Queue-based) | Sender & Receiver |
+| 9 | **JDBC** | JDBC / TCP | Synchronous | Receiver |
+| 10 | **Mail** | SMTP / IMAP / POP3 | Asynchronous | Sender & Receiver |
+| 11 | **SuccessFactors (SFSF)** | HTTP / HTTPS (OData / SOAP) | Synchronous / Asynchronous | Sender & Receiver |
+| 12 | **AMQP** | AMQP 1.0 (TCP / WebSocket) | Asynchronous (Event/Messaging) | Sender & Receiver |
+| 13 | **Advanced Event Mesh (AEM)** | SMF – Solace Message Format (TCP) | Asynchronous (Event-Driven / Pub-Sub) | Sender & Receiver |
+| 14 | **AS2** | HTTP / HTTPS | Asynchronous (EDI / B2B) | Sender & Receiver |
+| 15 | **XI (SAP PI/PO)** | HTTP / HTTPS | Asynchronous | Sender & Receiver |
+
+---
+
+## Key Notes
+
+| Term | Explanation |
+|---|---|
+| **Sender** | Adapter acts as inbound — receives/triggers messages *into* CPI |
+| **Receiver** | Adapter acts as outbound — CPI sends messages *out* to target system |
+| **Sender & Receiver** | Adapter supports both directions |
+| **Synchronous** | Request-Reply pattern; caller waits for an immediate response |
+| **Asynchronous** | Fire-and-forget or event-driven; no immediate response required |
+
+---
