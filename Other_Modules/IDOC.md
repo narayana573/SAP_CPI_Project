@@ -3,6 +3,9 @@
 
 Based on the infographic provided, an **IDOC (Intermediate Document)** is a standard data container used to exchange information between SAP systems or between SAP and external applications. Think of it as a digital envelope that carries business data (like a purchase order or an invoice) from one place to another.
 
+# How SAP S4HANA On-Premise (IDOC-Outbound) to SAP Integration Suite - Inbound IDoc Interface
+
+https://community.sap.com/t5/technology-blog-posts-by-members/how-sap-s4hana-on-premise-idoc-outbound-to-sap-integration-suite-inbound/ba-p/14352165
 ---
 
 ## 1. What is an IDOC?
